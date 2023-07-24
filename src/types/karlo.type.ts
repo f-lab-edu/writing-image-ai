@@ -10,7 +10,7 @@ interface KarloResponseBase {
 }
 
 export interface CreateIamgeByKarloParams {
-  prompt: string; // 이미지를 묘사하는 제시어, 영문만 지원 (최대: 256자)
+  prompt?: string; // 이미지를 묘사하는 제시어, 영문만 지원 (최대: 256자)
   negative_prompt?: string; // 	이미지 생성 시 제외할 요소를 묘사하는 부정 제시어, 영문만 지원 (최대: 256자)
   width?: number; // 	이미지 가로 크기, 8의 배수여야 함 (단위: 픽셀, 기본값: 512, 최소: 384, 최대 640)
   height?: number; // 	이미지 세로 크기, 8의 배수여야 함 (단위: 픽셀, 기본값: 512, 최소: 384, 최대 640)
@@ -24,9 +24,9 @@ export interface CreateIamgeByKarloParams {
   prior_guidance_scale?: number; // 이미지 생성 과정의 노이즈 제거 척도 (기본값: 5.0, 최소: 1.0, 최대 20.0)
   num_inference_steps?: number; // 디코더를 통한 노이즈 제거 단계 수 (기본값: 50, 최소: 10, 최대 100)
   guidance_scale?: number; // 디코더를 통한 노이즈 제거 척도 (기본값: 5.0, 최소: 1.0, 최대 20.0)
-  scheduler: KarloScheduler;
-  seed: number[]; // 각 이미지 생성 작업에 사용할 시드(Seed) 값, 생성할 이미지 수와 같은 길이의 배열이어야 함, 0 이상 4,294,967,295 이하 숫자로 구성,  파라미터 미사용 시 무작위(Random) 시드 값으로 이미지 생성 (기본값: null)
-  nsfw_checker: boolean; // 생성할 이미지에 대한 NSFW 검사하기 수행 여부 true: 확인 false: 확인하지 않음 (기본값: false)
+  scheduler?: KarloScheduler;
+  seed?: number[]; // 각 이미지 생성 작업에 사용할 시드(Seed) 값, 생성할 이미지 수와 같은 길이의 배열이어야 함, 0 이상 4,294,967,295 이하 숫자로 구성,  파라미터 미사용 시 무작위(Random) 시드 값으로 이미지 생성 (기본값: null)
+  nsfw_checker?: boolean; // 생성할 이미지에 대한 NSFW 검사하기 수행 여부 true: 확인 false: 확인하지 않음 (기본값: false)
 }
 
 export interface CreateIamgeByKarloResponse extends KarloResponseBase {
