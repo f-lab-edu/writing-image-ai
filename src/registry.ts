@@ -1,3 +1,4 @@
+import { $app } from "./constants/element";
 import { Controller } from "./types/contoller.type";
 import { State } from "./types/model.type";
 import { Component } from "./types/view.type";
@@ -5,8 +6,8 @@ import { Component } from "./types/view.type";
 const registry: { [name: string]: Component } = {};
 
 const renderWrapper = (component: Component) => {
-  return (targetElement: HTMLElement, state: State, events: Controller) => {
-    const element = component(targetElement, state, events);
+  return (state: State, events: Controller) => {
+    const element = component(state, events);
 
     const childComponents =
       element.querySelectorAll<HTMLElement>("[data-component]");
@@ -18,7 +19,7 @@ const renderWrapper = (component: Component) => {
         if (!child) {
           return;
         }
-        target.replaceWith(child(target, state, events));
+        target.replaceWith(child(state, events));
       }
     });
     return element;
@@ -29,12 +30,12 @@ const add = (name: string, component: Component) => {
   registry[name] = renderWrapper(component);
 };
 
-const renderRoot = (root: HTMLElement, state: State, events: Controller) => {
-  const cloneComponent = (root: HTMLElement) => {
-    return root.cloneNode(true) as HTMLElement;
+const renderRoot = (state: State, events: Controller) => {
+  const cloneComponent = () => {
+    return $app.cloneNode(true) as HTMLElement;
   };
 
-  return renderWrapper(cloneComponent)(root, state, events);
+  return renderWrapper(cloneComponent)(state, events);
 };
 
 export default {

@@ -1,14 +1,10 @@
+import { $app } from "../constants/element";
 import { createIamgeByKarlo } from "../services/karlo.api";
 import { Controller } from "../types/contoller.type";
 import { State } from "../types/model.type";
 
-export default (
-  targetElement: HTMLElement,
-  state: State,
-  events: Controller
-) => {
-  console.log("Home");
-  targetElement.innerHTML = `
+export default (state: State, events: Controller) => {
+  $app.innerHTML = `
   <section style="padding-top: 12px;">
     <article style="text-align: center">
       <h2>Kakao의 이미지 생성 Ai Karlo</h2>
@@ -26,11 +22,11 @@ export default (
 
   if (state.images) {
     state.images.map((image) => {
-      targetElement.innerHTML += `<img src="${image.image}" alt="${image.id}" />`;
+      $app.innerHTML += `<img src="${image.image}" alt="${image.id}" />`;
     });
   }
 
-  const createImagePromptElement = targetElement.querySelector(
+  const createImagePromptElement = $app.querySelector(
     "#create-prompt"
   ) as HTMLInputElement;
 
@@ -55,5 +51,5 @@ export default (
     }
   );
 
-  return targetElement;
+  return $app;
 };

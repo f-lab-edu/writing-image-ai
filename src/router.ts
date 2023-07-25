@@ -1,38 +1,29 @@
+import { $app } from "./constants/element";
 import { Controller } from "./types/contoller.type";
 import { State } from "./types/model.type";
 import { Component } from "./types/view.type";
 
 const registry: { [path: string]: Component } = {};
-let notFound: Component = (
-  targetElement: HTMLElement,
-  state: State,
-  events: any
-) => {
+let notFound: Component = (state: State, events: any) => {
   // Do nothing or return a default HTMLElement, e.g., an empty div
   return document.createElement("div");
 };
 
 const renderWrapper = (component: Component) => {
-  return (targetElement: HTMLElement, state: State, events: Controller) => {
-    const element = component(targetElement, state, events);
+  return (state: State, events: Controller) => {
+    const element = component(state, events);
     return element;
   };
 };
 
-const navigate = (
-  path: string,
-  targetElement: HTMLElement,
-  state: State,
-  events: Controller
-) => {
+const navigate = (path: string, state: State, events: Controller) => {
   const component = registry[path] || notFound;
 
   if (component) {
-    while (targetElement.firstChild) {
-      targetElement.removeChild(targetElement.firstChild);
+    while ($app.firstChild) {
+      $app.removeChild($app.firstChild);
     }
-    component(targetElement, state, events);
-    // targetElement.appendChild(element);
+    component(state, events);
   }
 
   history.pushState(null, "", path);
@@ -40,7 +31,6 @@ const navigate = (
 
 const addRoute = (path: string, component: Component) => {
   registry[path] = renderWrapper(component);
-  console.log("registry", registry);
 };
 
 const setNotFound = (component: Component) => {

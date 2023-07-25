@@ -6,12 +6,11 @@ import homePage from "./page/home.page";
 import imagePage from "./page/image.page";
 
 const model = modelFactory();
-const app: HTMLElement = document.querySelector<HTMLElement>("#app")!;
 
 const events: Controller = {
   addImage: (image: Image) => {
     model.addImage(image);
-    router.navigate("/image", app, model.getState(), events);
+    router.navigate("/image", model.getState(), events);
   },
   deleteImage: (image: Image) => {
     model.deleteImage(image);
@@ -27,12 +26,12 @@ router.addRoute("/image", imagePage);
 // router.setNotFound(notFoundComponent);
 
 // Navigate to a route
-router.navigate(window.location.pathname, app, model.getState(), events);
+router.navigate(window.location.pathname, model.getState(), events);
 
 model.addObserver(() => {
   const { pathname } = window.location;
   console.log("addObserver");
-  router.navigate(pathname, app, model.getState(), events);
+  router.navigate(pathname, model.getState(), events);
 });
 
 window.addEventListener("load", () => {
@@ -40,6 +39,6 @@ window.addEventListener("load", () => {
     console.log("popstate");
     const path = window.location.pathname;
     const root: HTMLElement = document.querySelector<HTMLElement>("#root")!;
-    router.navigate(path, root, event.state, events);
+    router.navigate(path, event.state, events);
   });
 });
