@@ -20,12 +20,6 @@ export default (state: State, events: Controller) => {
   </section>
 `;
 
-  if (state.images) {
-    state.images.map((image) => {
-      $app.innerHTML += `<img src="${image.image}" alt="${image.id}" />`;
-    });
-  }
-
   const createImagePromptElement = $app.querySelector(
     "#create-prompt"
   ) as HTMLInputElement;
