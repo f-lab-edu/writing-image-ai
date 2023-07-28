@@ -2,9 +2,6 @@ import { defineConfig, loadEnv } from "vite";
 import { transformSync } from "@swc/core";
 import basicSsl from "@vitejs/plugin-basic-ssl";
 import fs from "fs";
-import dns from "dns";
-
-dns.setDefaultResultOrder("verbatim");
 
 // 한 곳에서 swc 설정을 관리하기 위해서 파일을 불러와서 쓰기
 const swcConfig = JSON.parse(fs.readFileSync(".swcrc", "utf-8"));
