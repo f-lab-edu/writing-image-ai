@@ -5,45 +5,44 @@ import { State } from "../types/model.type";
 
 export default (state: State, events: Controller) => {
   $app.innerHTML = `
-  <section style="padding-top: 12px;">
-    <article style="text-align: center">
-      <h2>Kakao의 이미지 생성 Ai Karlo</h2>
-      이미지를 만들어주는 Ai 플랫폼입니다.
-    </article>
-    <div style="padding-top: 20px">
-      <label for="create-prompt" style="font-size: 18px;"> 
-        <b>Prompt</b> 
-        (Wirte Only English)
-      </label>
-      <input id="create-prompt" style="width: 100%; font-size: 16px; margin-top: 6px" placeholder="A cat with white fur" />
-    </div>
-  </section>
-`;
+    <section style="padding-top: 12px;">
+      <article style="text-align: center">
+        <h2>Kakao의 이미지 생성 Ai Karlo</h2>
+        이미지를 만들어주는 Ai 플랫폼입니다.
+      </article>
+      <form id="create-image-submit" style="padding-top: 20px">
+        <label for="create-image-prompt" style="font-size: 18px;"> 
+          <b>Prompt</b> 
+          (Wirte Only English)
+        </label>
+        <input id="create-image-prompt" style="width: 100%; font-size: 16px; margin-top: 6px" placeholder="A cat with white fur" />
+      </form>
+    </section>
+  `;
 
-  const createImagePromptElement = $app.querySelector(
-    "#create-prompt"
+  const createImageForm = $app.querySelector("#create-image-submit");
+  const createImageInput = $app.querySelector(
+    "#create-image-prompt"
   ) as HTMLInputElement;
 
-  createImagePromptElement.addEventListener(
-    "keypress",
-    async (e: KeyboardEvent) => {
-      if (e.key === "Enter") {
-        const prompt = createImagePromptElement.value;
-        try {
-          const response = await createIamgeByKarlo({
-            prompt,
-          });
-          response.data.images.forEach((image) => {
-            events.addImage(image);
-          });
-        } catch (err) {
-          console.error(err);
-        } finally {
-          createImagePromptElement.value = "";
-        }
+  if (createImageForm && createImageInput) {
+    createImageForm.addEventListener("submit", async (e) => {
+      e.preventDefault();
+      const prompt = createImageInput.value;
+      try {
+        const response = await createIamgeByKarlo({
+          prompt,
+        });
+        response.data.images.forEach((image) => {
+          events.addImage(image);
+        });
+      } catch (err) {
+        console.error(err);
+      } finally {
+        createImageInput.value = "";
       }
-    }
-  );
+    });
+  }
 
   return $app;
 };

@@ -1,5 +1,4 @@
 import { $app } from "../constants/element";
-import { createIamgeByKarlo } from "../services/karlo.api";
 import { Controller } from "../types/contoller.type";
 import { State } from "../types/model.type";
 
