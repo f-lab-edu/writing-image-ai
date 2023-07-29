@@ -1,4 +1,4 @@
-import axios from "axios";
+import { commonAxios } from "./axios.config";
 import {
   CreateIamgeByKarloParams,
   CreateIamgeByKarloResponse,
@@ -12,7 +12,7 @@ import {
 
 const apiKey = import.meta.env.VITE_APP_KARLO_API_KEY;
 
-export const karloApi = axios.create({
+const karloApi = commonAxios({
   baseURL: "https://api.kakaobrain.com/v2/inference/karlo",
   headers: {
     "Content-Type": "application/json",
