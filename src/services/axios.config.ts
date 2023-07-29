@@ -1,4 +1,4 @@
-import axios, { CreateAxiosDefaults } from "axios";
+import axios, { CreateAxiosDefaults } from 'axios';
 
 export const commonAxios = (config?: CreateAxiosDefaults) => {
   const axiosInstance = axios.create(config);

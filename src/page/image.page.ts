@@ -1,8 +1,8 @@
-import { $app } from "../constants/element";
-import { Controller } from "../types/contoller.type";
-import { State } from "../types/model.type";
+import { $app } from '../constants/element';
+import { type Controller } from '../types/contoller.type';
+import { type State } from '../types/model.type';
 
-export default (state: State, events: Controller) => {
+export default (state: State, events: Controller): HTMLElement => {
   const section = `
     <section style="display: flex; flex-direction: column; align-items: center; padding-top: 8px">
       ${
@@ -14,10 +14,7 @@ export default (state: State, events: Controller) => {
               <a href="/"> Plase Go Home </a>
             `
           : `
-            ${state.images.map(
-              (image) =>
-                `<img src="${image.image}" alt="${image.id}" id="${image.id}" />`
-            )}
+            ${state.images.map((image) => `<img src="${image.image}" alt="${image.id}" id="${image.id}" />`)}
             <h3>Select Other Job</h3>
           `
       }
