@@ -4,6 +4,7 @@ module.exports = {
     es2021: true,
   },
   extends: 'standard-with-typescript',
+  plugins: ["no-console"],
   overrides: [
     {
       env: {
@@ -20,6 +21,8 @@ module.exports = {
     ecmaVersion: 'latest',
     sourceType: 'module',
   },
-  rules: {},
+  rules: {
+    "no-console": ["error", { allow: ["warn", "error"] }]
+  },
   ignorePatterns: ['.eslintrc.cjs'],
 };
