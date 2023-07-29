@@ -29,5 +29,5 @@ module.exports = {
     "space-before-function-paren": "off", // 함수 앞 공백이 없으면 에러 (off)
     "@typescript-eslint/space-before-function-paren": "off" // 함수 앞 공백이 없으면 에러 (off)
   },
-  ignorePatterns: ['.eslintrc.cjs'],
+  ignorePatterns: ['.eslintrc.cjs', "vite.config.ts"],
 };
