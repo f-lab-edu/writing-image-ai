@@ -1,8 +1,9 @@
+import goHomeComponent from '../components/go-home';
 import { $app } from '../constants/element';
-import { type Controller } from '../types/contoller.type';
-import { type State } from '../types/model.type';
+import { modelContext } from '../contexts';
 
-export default (state: State, events: Controller): HTMLElement => {
+export default (): HTMLElement => {
+  const state = modelContext.getState();
   const section = `
     <section style="display: flex; flex-direction: column; align-items: center; padding-top: 8px">
       ${
@@ -11,11 +12,12 @@ export default (state: State, events: Controller): HTMLElement => {
               <div>
                 <h2> Not Image </h2>
               </div>
-              <a href="/"> Plase Go Home </a>
+              ${goHomeComponent()}
             `
           : `
             ${state.images.map((image) => `<img src="${image.image}" alt="${image.id}" id="${image.id}" />`)}
             <h3>Select Other Job</h3>
+            <button style="width: 100%; height: 52px"></button>
           `
       }
     </section>

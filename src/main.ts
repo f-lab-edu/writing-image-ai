@@ -1,44 +1,23 @@
 import router from './router';
-import modelFactory from './model';
-import { type Controller } from './types/contoller.type';
-import { type Image } from './types/model.type';
 import homePage from './page/home.page';
 import imagePage from './page/image.page';
+import { modelContext } from './contexts';
 
-const model = modelFactory();
-
-const events: Controller = {
-  addImage: (image: Image) => {
-    model.addImage(image);
-    router.navigate('/image', model.getState(), events);
-  },
-  deleteImage: (image: Image) => {
-    model.deleteImage(image);
-  },
-  updateImage: (image: Image) => {
-    model.updateImage(image);
-  },
-};
-
-// Add routes
 router.addRoute('/', homePage);
 router.addRoute('/image', imagePage);
-// router.setNotFound(notFoundComponent);
 
-// Navigate to a route
-router.navigate(window.location.pathname, model.getState(), events);
-
-model.addObserver(() => {
+modelContext.addObserver(() => {
   const { pathname } = window.location;
   console.log('addObserver');
-  router.navigate(pathname, model.getState(), events);
+  router.navigate(pathname);
 });
 
 window.addEventListener('load', () => {
-  window.addEventListener('popstate', (event) => {
+  window.addEventListener('popstate', () => {
     console.log('popstate');
     const path = window.location.pathname;
-    const root: HTMLElement = document.querySelector<HTMLElement>('#root')!;
-    router.navigate(path, event.state, events);
+    router.navigate(path);
   });
 });
+
+router.navigate(window.location.pathname);
