@@ -16,6 +16,9 @@ export const eventContext = {
   updateImage: (image: Image) => {
     modelContext.updateImage(image);
   },
+  setScaleUpImages: (base64_strings: string[]) => {
+    modelContext.setScaleUpImages(base64_strings);
+  },
   setLoading: (loading: boolean) => {
     modelContext.setLoading(loading);
   },

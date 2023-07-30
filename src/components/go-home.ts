@@ -1,5 +1,5 @@
-const goHomeComponent = () => {
+const GoHomeComponent = () => {
   return `<a href="/"> Plase Go Home </a>`;
 };
 
-export default goHomeComponent;
+export default GoHomeComponent;

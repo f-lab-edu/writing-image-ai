@@ -2,6 +2,7 @@ import { Image, State } from '../types/model.type';
 
 const INITIAL_STATE: State = {
   images: [],
+  scaleUpImages: [],
   loading: false,
 };
 
@@ -17,7 +18,7 @@ const getInitialState = (initalState: State) => {
   return initalState;
 };
 
-const setImageOnStorage = (state: State) => {
+const setStateOnStorage = (state: State) => {
   sessionStorage.setItem('state', JSON.stringify(state));
 };
 
@@ -26,6 +27,7 @@ export default (initalState = INITIAL_STATE) => {
 
   let imageObservers: Function;
   let loadingObservers: Function;
+  let scaleUpObservers: Function;
 
   const getState = () => {
     return Object.freeze(cloneDeep(state));
@@ -33,7 +35,7 @@ export default (initalState = INITIAL_STATE) => {
 
   const setImages = (images: Image[]) => {
     state.images = images;
-    notifyHandler();
+    notifyImageHandler();
   };
 
   const addImage = (image: Image) => {
@@ -41,7 +43,7 @@ export default (initalState = INITIAL_STATE) => {
       return;
     }
     state.images.push(image);
-    notifyHandler();
+    notifyImageHandler();
   };
 
   const deleteImage = (image: Image) => {
@@ -49,7 +51,7 @@ export default (initalState = INITIAL_STATE) => {
       return;
     }
     state.images = state.images.filter((item) => item.id !== image.id);
-    notifyHandler();
+    notifyImageHandler();
   };
 
   const updateImage = (image: Image) => {
@@ -58,7 +60,12 @@ export default (initalState = INITIAL_STATE) => {
     }
     const filteredImage = state.images.filter((item) => item.id !== image.id);
     state.images = [...filteredImage, image];
-    notifyHandler();
+    notifyImageHandler();
+  };
+
+  const setScaleUpImages = (base64_strings: string[]) => {
+    state.scaleUpImages = base64_strings;
+    notifyImageHandler();
   };
 
   const setLoading = (loading: boolean) => {
@@ -74,17 +81,17 @@ export default (initalState = INITIAL_STATE) => {
     loadingObservers = observer;
   };
 
-  const notifyObservar = () => {
-    imageObservers();
-  };
-
-  const notifyHandler = () => {
-    setImageOnStorage(state);
-    notifyObservar();
+  const notifyImageHandler = () => {
+    setStateOnStorage(state);
+    if (imageObservers) {
+      imageObservers();
+    }
   };
 
   const notifyLoadingHandler = () => {
-    loadingObservers(state.loading);
+    if (loadingObservers) {
+      loadingObservers(state.loading);
+    }
   };
 
   return {
@@ -94,6 +101,10 @@ export default (initalState = INITIAL_STATE) => {
     deleteImage,
     updateImage,
     registerImageObserver,
+
+    // Scale Up Image
+    setScaleUpImages,
+
     // Laoding
     setLoading,
     registerLoadingObserver,

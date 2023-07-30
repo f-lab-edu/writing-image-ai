@@ -33,6 +33,13 @@ button:disabled {
   margin-top: 0.25rem;
 }
 
+.group-button {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  align-items: center;
+}
+
 #root {
   padding: 12px;
 }

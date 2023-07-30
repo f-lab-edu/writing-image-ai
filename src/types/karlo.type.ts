@@ -1,7 +1,7 @@
-type KarloImageFormat = "webp" | "jpeg" | "png"; // 이미지 파일 형식, 다음 중 하나 webp, jpeg, png (기본값: webp)
+type KarloImageFormat = 'webp' | 'jpeg' | 'png'; // 이미지 파일 형식, 다음 중 하나 webp, jpeg, png (기본값: webp)
 type KarloScale = 2 | 4; // 확대 배율, 2 또는 4 중 하나 (기본값: 2)
-type KarloReturnType = "url" | "base64_string"; // 결과 반환 형식, 다음 중 하나 url, base64_string (기본값: url)
-type KarloScheduler = "decoder_ddim_v_prediction" | "decoder_ddpm_v_prediction"; // 디코더를 통한 노이즈 제거 단계에서 사용할 스케줄러 다음 중 1 (기본값: decoder_ddim_v_prediction), decoder_ddpm_v_prediction
+type KarloReturnType = 'url' | 'base64_string'; // 결과 반환 형식, 다음 중 하나 url, base64_string (기본값: url)
+type KarloScheduler = 'decoder_ddim_v_prediction' | 'decoder_ddpm_v_prediction'; // 디코더를 통한 노이즈 제거 단계에서 사용할 스케줄러 다음 중 1 (기본값: decoder_ddim_v_prediction), decoder_ddpm_v_prediction
 type KarloSamples = 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8; // 생성할 이미지 수 (기본값: 1, 최소: 1, 최대: 8)
 
 interface KarloResponseBase {
@@ -41,7 +41,7 @@ export interface UpscaleIamgeByKarloParams {
   images: string[]; // 확대할 이미지 파일을 Base64 인코딩한 값, 이미지 크기는 가로세로 최대 1024 픽셀 이하여야 함, webp, png, jpeg, heic 형식의 이미지 파일 지원, 최대 8개
   scale?: KarloScale;
   image_format?: KarloImageFormat;
-  image_quality: number; // 이미지 품질 (기본값: 70, 최소: 1, 최대: 100)
+  image_quality?: number; // 이미지 품질 (기본값: 70, 최소: 1, 최대: 100)
   return_type?: KarloReturnType;
 }
 

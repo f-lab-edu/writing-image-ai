@@ -29,12 +29,13 @@ export default () => {
       const prompt = createImageInput.value;
       try {
         eventContext.setLoading(true);
-        const response = await createIamgeByKarlo({
+        const data = await createIamgeByKarlo({
           prompt,
+          return_type: 'base64_string',
         });
 
-        if (response?.data?.images) {
-          eventContext.setImages(response.data.images);
+        if (data.images) {
+          eventContext.setImages(data.images);
         }
 
         router.navigate('/image');
