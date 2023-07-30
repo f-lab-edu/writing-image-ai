@@ -28,6 +28,7 @@ export default () => {
       e.preventDefault();
       const prompt = createImageInput.value;
       try {
+        eventContext.setLoading(true);
         const response = await createIamgeByKarlo({
           prompt,
         });
@@ -41,6 +42,7 @@ export default () => {
         console.error(err);
       } finally {
         createImageInput.value = '';
+        eventContext.setLoading(false);
       }
     });
   }

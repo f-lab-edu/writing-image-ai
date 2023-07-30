@@ -1,15 +1,23 @@
 import router from './router';
 import homePage from './page/home.page';
 import imagePage from './page/image.page';
-import { modelContext } from './contexts';
+import { eventContext } from './contexts';
+import { $loading } from './constants/element';
 
 router.addRoute('/', homePage);
 router.addRoute('/image', imagePage);
 
-modelContext.addObserver(() => {
+eventContext.registerImageObserver(() => {
   const { pathname } = window.location;
-  console.log('addObserver');
   router.navigate(pathname);
+});
+
+eventContext.registerLoadingObserver((loading: boolean) => {
+  if (loading) {
+    $loading.style.display = 'flex';
+  } else {
+    $loading.style.display = 'none';
+  }
 });
 
 window.addEventListener('load', () => {
