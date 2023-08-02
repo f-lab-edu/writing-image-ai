@@ -1,6 +1,4 @@
-//* 클로저 예시로 상태를 쓰는 예시여서 일단 남겨둠.
-
-export function setupCounter(element: HTMLButtonElement): void {
+const setupCounter = ({ element }: { element: HTMLButtonElement }) => {
   let counter = 0;
   const setCounter = (count: number): void => {
     counter = count;
@@ -10,4 +8,6 @@ export function setupCounter(element: HTMLButtonElement): void {
     setCounter(counter + 1);
   });
   setCounter(0);
-}
+};
+
+export default setupCounter;
