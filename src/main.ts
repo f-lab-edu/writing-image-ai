@@ -4,10 +4,12 @@ import imagePage from './page/image.page';
 import { eventContext } from './contexts';
 import { $loading } from './constants/element';
 import scaleUpPage from './page/scale-up.page';
+import variationsPage from './page/variations.page';
 
 router.addRoute('/', homePage);
 router.addRoute('/image', imagePage);
 router.addRoute('/scale-up', scaleUpPage);
+router.addRoute('/variations', variationsPage);
 
 eventContext.registerImageObserver(() => {
   const { pathname } = window.location;

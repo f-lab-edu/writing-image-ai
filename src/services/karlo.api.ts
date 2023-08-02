@@ -27,6 +27,7 @@ export const createIamgeByKarlo = (param: CreateIamgeByKarloParams) =>
 
 export const upscaleIamgeByKarlo = (param: UpscaleIamgeByKarloParams) => karloApi.post<UpscaleIamgeByKarloResponse>('/upscale', param).then((res) => res.data);
 
-export const variationsIamgeByKarlo = (param: VariationsIamgeByKarloParams) => karloApi.post<VariationsIamgeByKarloResponse>('/variations', param);
+export const variationsIamgeByKarlo = (param: VariationsIamgeByKarloParams) =>
+  karloApi.post<VariationsIamgeByKarloResponse>('/variations', param).then((res) => res.data);
 
 export const nsfwIamgeByKarlo = (param: NSFWCheckerIamgeByKarloParams) => karloApi.post<NSFWCheckerIamgeByKarloResponse>('/variations', param);
