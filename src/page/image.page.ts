@@ -1,8 +1,9 @@
-import { $app } from "../constants/element";
-import { Controller } from "../types/contoller.type";
-import { State } from "../types/model.type";
+import goHomeComponent from '../components/go-home';
+import { $app } from '../constants/element';
+import { modelContext } from '../contexts';
 
-export default (state: State, events: Controller) => {
+export default (): HTMLElement => {
+  const state = modelContext.getState();
   const section = `
     <section style="display: flex; flex-direction: column; align-items: center; padding-top: 8px">
       ${
@@ -11,14 +12,12 @@ export default (state: State, events: Controller) => {
               <div>
                 <h2> Not Image </h2>
               </div>
-              <a href="/"> Plase Go Home </a>
+              ${goHomeComponent()}
             `
           : `
-            ${state.images.map(
-              (image) =>
-                `<img src="${image.image}" alt="${image.id}" id="${image.id}" />`
-            )}
+            ${state.images.map((image) => `<img src="${image.image}" alt="${image.id}" id="${image.id}" />`)}
             <h3>Select Other Job</h3>
+            <button style="width: 100%; height: 52px"></button>
           `
       }
     </section>

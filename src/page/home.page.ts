@@ -1,9 +1,9 @@
-import { $app } from "../constants/element";
-import { createIamgeByKarlo } from "../services/karlo.api";
-import { Controller } from "../types/contoller.type";
-import { State } from "../types/model.type";
+import { $app } from '../constants/element';
+import { eventContext } from '../contexts';
+import router from '../router';
+import { createIamgeByKarlo } from '../services/karlo.api';
 
-export default (state: State, events: Controller) => {
+export default () => {
   $app.innerHTML = `
     <section style="padding-top: 12px;">
       <article style="text-align: center">
@@ -20,26 +20,27 @@ export default (state: State, events: Controller) => {
     </section>
   `;
 
-  const createImageForm = $app.querySelector("#create-image-submit");
-  const createImageInput = $app.querySelector(
-    "#create-image-prompt"
-  ) as HTMLInputElement;
+  const createImageForm = $app.querySelector('#create-image-submit');
+  const createImageInput = $app.querySelector('#create-image-prompt') as HTMLInputElement;
 
   if (createImageForm && createImageInput) {
-    createImageForm.addEventListener("submit", async (e) => {
+    createImageForm.addEventListener('submit', async (e) => {
       e.preventDefault();
       const prompt = createImageInput.value;
       try {
         const response = await createIamgeByKarlo({
           prompt,
         });
-        response.data.images.forEach((image) => {
-          events.addImage(image);
-        });
+
+        if (response?.data?.images) {
+          eventContext.setImages(response.data.images);
+        }
+
+        router.navigate('/image');
       } catch (err) {
         console.error(err);
       } finally {
-        createImageInput.value = "";
+        createImageInput.value = '';
       }
     });
   }

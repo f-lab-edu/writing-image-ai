@@ -8,7 +8,6 @@ export type RouterCallback = (param: { [key: string]: string }) => void;
 
 export interface Router {
   addRoute?: (path: string, callback: RouterCallback) => Router;
-  setNotFound?: (cb: () => void) => Router;
   navigate?: (path: string) => Router;
   start?: () => Router;
 }
