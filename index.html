@@ -6,10 +6,11 @@
   <link rel="icon" type="image/svg+xml" href="/vite.svg" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Vite + TS</title>
+  <link rel="stylesheet" href="./src/styles/style.css" />
 </head>
 
 <body>
-  <div id="root" style="padding: 12px;">
+  <div id="root">
     <header id="header" style="text-align: center; border-bottom: 1px solid black;">
       <h1>
         <a style="color: black; text-decoration: none;" href="/">Wrting Image AI</a>
@@ -17,7 +18,9 @@
     </header>
     <div id="app">
     </div>
-
+  </div>
+  <div id="loading-wrapper">
+    <img src="/images/loading.gif" alt="loading" />
   </div>
   <script type="module" src="/src/main.ts"></script>
 </body>

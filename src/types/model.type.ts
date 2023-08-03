@@ -5,4 +5,5 @@ export interface Image {
 
 export interface State {
   images: Image[];
+  loading: boolean;
 }

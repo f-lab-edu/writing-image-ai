@@ -16,4 +16,13 @@ export const eventContext = {
   updateImage: (image: Image) => {
     modelContext.updateImage(image);
   },
+  setLoading: (loading: boolean) => {
+    modelContext.setLoading(loading);
+  },
+  registerImageObserver: (observer: () => void) => {
+    modelContext.registerLoadingObserver(observer);
+  },
+  registerLoadingObserver: (observer: (loading: boolean) => void) => {
+    modelContext.registerLoadingObserver(observer);
+  },
 };

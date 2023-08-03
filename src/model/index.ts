@@ -2,6 +2,7 @@ import { Image, State } from '../types/model.type';
 
 const INITIAL_STATE: State = {
   images: [],
+  loading: false,
 };
 
 const cloneDeep = (state: State): State => {
@@ -23,7 +24,8 @@ const setImageOnStorage = (state: State) => {
 export default (initalState = INITIAL_STATE) => {
   const state = cloneDeep(getInitialState(initalState));
 
-  const observers: Array<() => void> = [];
+  let imageObservers: Function;
+  let loadingObservers: Function;
 
   const getState = () => {
     return Object.freeze(cloneDeep(state));
@@ -59,12 +61,21 @@ export default (initalState = INITIAL_STATE) => {
     notifyHandler();
   };
 
-  const addObserver = (observer: () => void) => {
-    observers.push(observer);
+  const setLoading = (loading: boolean) => {
+    state.loading = loading;
+    notifyLoadingHandler();
+  };
+
+  const registerImageObserver = (observer: () => void) => {
+    imageObservers = observer;
+  };
+
+  const registerLoadingObserver = (observer: (loading: boolean) => void) => {
+    loadingObservers = observer;
   };
 
   const notifyObservar = () => {
-    observers.forEach((observer) => observer());
+    imageObservers();
   };
 
   const notifyHandler = () => {
@@ -72,12 +83,21 @@ export default (initalState = INITIAL_STATE) => {
     notifyObservar();
   };
 
+  const notifyLoadingHandler = () => {
+    loadingObservers(state.loading);
+  };
+
   return {
+    // Image
     setImages,
     addImage,
     deleteImage,
     updateImage,
+    registerImageObserver,
+    // Laoding
+    setLoading,
+    registerLoadingObserver,
+    // Common
     getState,
-    addObserver,
   };
 };
