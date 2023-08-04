@@ -18,8 +18,6 @@ export default defineConfig(({ command, mode }) => {
       build: {
         target: 'esnext',
         emptyOutDir: true,
-        minify: 'esbuild',
-        // cssMinify: "esbuild", // 공식 문서 설명: Default is the same as build.minify
       },
       server: {
         open: true,
