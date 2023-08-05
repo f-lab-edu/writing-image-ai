@@ -5,6 +5,4 @@ import Controller from './MainController';
 export const model = new Model();
 export const view = new View();
 
-export default () => {
-  new Controller(model, view);
-};
+new Controller(model, view);
