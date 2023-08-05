@@ -1,14 +1,13 @@
 import Button from '../components/button';
 import NoImageContent from '../components/no-image';
 import { $app } from '../constants/element';
-import { eventContext, modelContext } from '../contexts';
-import router from '../router';
+import controller from '../main';
 import { variationsIamgeByKarlo } from '../services/karlo.api';
 import { Image } from '../types/model.type';
-import { clickListener, submitAsyncListener } from '../utils/clickHandler';
+import { clickListener, submitAsyncListener } from '../utils/click';
 
 export default (): HTMLElement => {
-  const { images } = modelContext.getState();
+  const { images } = controller.model.getState();
   let params = new URLSearchParams(window.location.search);
   let findImage = images.find((image) => image.id === params.get('image'));
   let newImages: Image[] = [];
@@ -37,44 +36,46 @@ export default (): HTMLElement => {
     </section>
   `;
 
-  if (findImage) {
-    submitAsyncListener({
-      seletor: '#variation-image-submit',
-      callback: async () => {
-        const variationImageInput = $app.querySelector('#variation-image-prompt') as HTMLInputElement;
-        const prompt = variationImageInput.value;
-        if (findImage) {
-          const data = await variationsIamgeByKarlo({
-            image: findImage.image,
-            prompt,
-            return_type: 'base64_string',
-          });
-          const $variationImages = $app.querySelector('#variation-images');
-          if ($variationImages) {
-            $variationImages.innerHTML = `
-            ${data.images.map(
-              (image) => `
-                <img src="data:image/png;base64,${image.image}" alt="${image.id}-scale-up-image" id="${image.id}" />
-                `
-            )}
-          `;
-          }
-        }
-      },
-    });
-  }
-
   clickListener({
     seletor: '#go-image',
     callback: () => {
-      router.navigate('/image');
+      controller.render('/image');
     },
   });
 
   clickListener({
     seletor: '#go-home',
     callback: () => {
-      router.navigate('/');
+      controller.render('/');
+    },
+  });
+
+  if (!findImage) {
+    return $app;
+  }
+
+  submitAsyncListener({
+    seletor: '#variation-image-submit',
+    callback: async () => {
+      const variationImageInput = $app.querySelector('#variation-image-prompt') as HTMLInputElement;
+      const prompt = variationImageInput.value;
+      if (findImage) {
+        const data = await variationsIamgeByKarlo({
+          image: findImage.image,
+          prompt,
+          return_type: 'base64_string',
+        });
+        const $variationImages = $app.querySelector('#variation-images');
+        if ($variationImages) {
+          $variationImages.innerHTML = `
+          ${data.images.map(
+            (image) => `
+              <img src="data:image/png;base64,${image.image}" alt="${image.id}-scale-up-image" id="${image.id}" />
+              `
+          )}
+        `;
+        }
+      }
     },
   });
 

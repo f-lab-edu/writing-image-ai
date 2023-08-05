@@ -8,6 +8,6 @@ export type RouterCallback = (param: { [key: string]: string }) => void;
 
 export interface Router {
   addRoute?: (path: string, callback: RouterCallback) => Router;
-  navigate?: (path: string) => Router;
+  render?: (path: string) => Router;
   start?: () => Router;
 }

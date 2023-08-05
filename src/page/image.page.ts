@@ -1,13 +1,13 @@
 import Button from '../components/button';
 import NoImageContent from '../components/no-image';
 import { $app } from '../constants/element';
-import { eventContext, modelContext } from '../contexts';
-import router from '../router';
+import controller from '../main';
 import { upscaleIamgeByKarlo } from '../services/karlo.api';
+import { clickListener } from '../utils/click';
 
 export default (): HTMLElement => {
-  const state = modelContext.getState();
-  const section = `
+  const state = controller.model.getState();
+  $app.innerHTML = `
     <section style="display: flex; flex-direction: column; align-items: center; padding-top: 8px">
       ${
         state.images.length === 0
@@ -24,26 +24,28 @@ export default (): HTMLElement => {
     </section>
   `;
 
-  $app.innerHTML = section;
+  clickListener({
+    seletor: '#go-scale-up',
+    callback: async () => {
+      controller.model.setLoading(true);
+      try {
+        const data = await upscaleIamgeByKarlo({
+          images: state.images.map((image) => image.image),
+          return_type: 'base64_string',
+        });
+        console.log({ data });
 
-  $app.querySelector('#go-scale-up')?.addEventListener('click', async (e: Event) => {
-    eventContext.setLoading(true);
-    try {
-      const data = await upscaleIamgeByKarlo({
-        images: state.images.map((image) => image.image),
-        return_type: 'base64_string',
-      });
-      console.log({ data });
-
-      if (data.images) {
-        eventContext.setScaleUpImages(data.images);
-        router.navigate('/scale-up');
+        if (data.images) {
+          controller.model.setScaleUpImages(data.images);
+          controller.render('/scale-up');
+        }
+      } catch (err) {
+        console.error(err);
+      } finally {
+        controller.model.setLoading(false);
       }
-    } catch (err) {
-      console.error(err);
-    } finally {
-      eventContext.setLoading(false);
-    }
+    },
   });
+
   return $app;
 };

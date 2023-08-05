@@ -1,11 +1,11 @@
 import Button from '../components/button';
 import NoImageContent from '../components/no-image';
 import { $app } from '../constants/element';
-import { modelContext } from '../contexts';
-import router from '../router';
+import controller from '../main';
+import { clickListener } from '../utils/click';
 
 export default (): HTMLElement => {
-  const state = modelContext.getState();
+  const state = controller.model.getState();
   const section = `
     <section style="display: flex; flex-direction: column; align-items: center; padding-top: 8px">
       ${
@@ -28,12 +28,19 @@ export default (): HTMLElement => {
 
   $app.innerHTML = section;
 
-  $app.querySelector('#go-image')?.addEventListener('click', async () => {
-    router.navigate('/image');
+  clickListener({
+    seletor: '#go-image',
+    callback: () => {
+      controller.render('/image');
+    },
   });
 
-  $app.querySelector('#go-home')?.addEventListener('click', async () => {
-    router.navigate('/');
+  clickListener({
+    seletor: '#go-home',
+    callback: () => {
+      controller.render('/');
+    },
   });
+
   return $app;
 };

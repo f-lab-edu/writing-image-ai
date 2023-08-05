@@ -1,7 +1,7 @@
 import { $app } from '../constants/element';
-import { eventContext } from '../contexts';
-import router from '../router';
+import controller from '../main';
 import { createIamgeByKarlo } from '../services/karlo.api';
+import { submitAsyncListener } from '../utils/click';
 
 export default () => {
   $app.innerHTML = `
@@ -20,33 +20,29 @@ export default () => {
     </section>
   `;
 
-  const createImageForm = $app.querySelector('#create-image-submit');
-  const createImageInput = $app.querySelector('#create-image-prompt') as HTMLInputElement;
-
-  if (createImageForm && createImageInput) {
-    createImageForm.addEventListener('submit', async (e) => {
-      e.preventDefault();
-      const prompt = createImageInput.value;
+  submitAsyncListener({
+    seletor: '#create-image-submit',
+    callback: async () => {
+      const createImageInput = $app.querySelector('#create-image-prompt') as HTMLInputElement;
       try {
-        eventContext.setLoading(true);
+        const prompt = createImageInput.value;
+
         const data = await createIamgeByKarlo({
           prompt,
           return_type: 'base64_string',
         });
 
         if (data.images) {
-          eventContext.setImages(data.images);
+          controller.model.setImages(data.images);
         }
-
-        router.navigate('/image');
+        controller.render('/image');
       } catch (err) {
         console.error(err);
       } finally {
         createImageInput.value = '';
-        eventContext.setLoading(false);
       }
-    });
-  }
+    },
+  });
 
   return $app;
 };
