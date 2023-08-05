@@ -25,7 +25,7 @@ export default (): HTMLElement => {
 
   $app.innerHTML = section;
 
-  $app.querySelector('#go-scale-up')?.addEventListener('click', async (e: Event) => {
+  $app.querySelector('#go-scale-up')?.addEventListener('click', async () => {
     model.setLoading(true);
     try {
       const data = await upscaleIamgeByKarlo({
