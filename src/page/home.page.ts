@@ -1,6 +1,5 @@
 import { $app } from '../constants/element';
-import { eventContext } from '../contexts';
-import router from '../router';
+import { model, view } from '../main';
 import { createIamgeByKarlo } from '../services/karlo.api';
 
 export default () => {
@@ -28,22 +27,22 @@ export default () => {
       e.preventDefault();
       const prompt = createImageInput.value;
       try {
-        eventContext.setLoading(true);
+        model.setLoading(true);
         const data = await createIamgeByKarlo({
           prompt,
           return_type: 'base64_string',
         });
 
         if (data.images) {
-          eventContext.setImages(data.images);
+          model.setImages(data.images);
         }
 
-        router.navigate('/image');
+        view.render('/image');
       } catch (err) {
         console.error(err);
       } finally {
         createImageInput.value = '';
-        eventContext.setLoading(false);
+        model.setLoading(false);
       }
     });
   }
