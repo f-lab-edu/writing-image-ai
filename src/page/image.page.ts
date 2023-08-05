@@ -1,11 +1,11 @@
 import Button from '../components/button';
 import NoImageContent from '../components/no-image';
 import { $app } from '../constants/element';
-import { model, view } from '../main';
+import controller from '../main';
 import { upscaleIamgeByKarlo } from '../services/karlo.api';
 
 export default (): HTMLElement => {
-  const state = model.getState();
+  const state = controller.model.getState();
   const section = `
     <section style="display: flex; flex-direction: column; align-items: center; padding-top: 8px">
       ${
@@ -26,7 +26,7 @@ export default (): HTMLElement => {
   $app.innerHTML = section;
 
   $app.querySelector('#go-scale-up')?.addEventListener('click', async () => {
-    model.setLoading(true);
+    controller.model.setLoading(true);
     try {
       const data = await upscaleIamgeByKarlo({
         images: state.images.map((image) => image.image),
@@ -35,13 +35,13 @@ export default (): HTMLElement => {
       console.log({ data });
 
       if (data.images) {
-        model.setScaleUpImages(data.images);
-        view.render('/scale-up');
+        controller.model.setScaleUpImages(data.images);
+        controller.render('/scale-up');
       }
     } catch (err) {
       console.error(err);
     } finally {
-      model.setLoading(false);
+      controller.model.setLoading(false);
     }
   });
   return $app;

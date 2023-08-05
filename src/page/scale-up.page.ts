@@ -1,10 +1,10 @@
 import Button from '../components/button';
 import NoImageContent from '../components/no-image';
 import { $app } from '../constants/element';
-import { model, view } from '../main';
+import controller from '../main';
 
 export default (): HTMLElement => {
-  const state = model.getState();
+  const state = controller.model.getState();
   const section = `
     <section style="display: flex; flex-direction: column; align-items: center; padding-top: 8px">
       ${
@@ -28,11 +28,11 @@ export default (): HTMLElement => {
   $app.innerHTML = section;
 
   $app.querySelector('#go-image')?.addEventListener('click', async () => {
-    view.render('/image');
+    controller.render('/image');
   });
 
   $app.querySelector('#go-home')?.addEventListener('click', async () => {
-    view.render('/');
+    controller.render('/');
   });
   return $app;
 };

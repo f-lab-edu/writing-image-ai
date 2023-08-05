@@ -13,33 +13,37 @@ class Controller {
     this.model.registerImageObserver(() => this.onImageChange());
     this.model.registerLoadingObserver((loading) => this.onLoadingChange(loading));
 
-    this.initialize();;
+    this.initialize();
   }
+
+  render = (path: string) => {
+    this.view.render(path);
+  };
 
   initialize() {
     window.addEventListener('load', () => {
       window.addEventListener('popstate', () => {
         console.log('popstate');
         const path = window.location.pathname;
-        this.view.render(path);
+        this.render(path);
       });
     });
 
-    this.view.render(window.location.pathname);
+    this.render(window.location.pathname);
   }
 
-  onImageChange() {
+  onImageChange = () => {
     const { pathname } = window.location;
-    this.view.render(pathname);
-  }
+    this.render(pathname);
+  };
 
-  onLoadingChange(loading: boolean) {
+  onLoadingChange = (loading: boolean) => {
     if (loading) {
       $loading.style.display = 'flex';
     } else {
       $loading.style.display = 'none';
     }
-  }
+  };
 }
 
 export default Controller;
