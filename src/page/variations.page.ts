@@ -1,19 +1,17 @@
 import Button from '../components/button';
 import NoImageContent from '../components/no-image';
 import { $app } from '../constants/element';
-import controller from '../main';
+import { controller } from '../main';
 import { variationsIamgeByKarlo } from '../services/karlo.api';
-import { Image } from '../types/model.type';
 import { clickListener, submitAsyncListener } from '../utils/click';
 
 export default (): HTMLElement => {
   const { images } = controller.model.getState();
   let params = new URLSearchParams(window.location.search);
   let findImage = images.find((image) => image.id === params.get('image'));
-  let newImages: Image[] = [];
 
   $app.innerHTML = `
-    <section style="display: flex; flex-direction: column; align-items: center; padding-top: 8px">
+    <section class="space-y-1" style="display: flex; flex-direction: column; align-items: center; padding-top: 8px">
       ${
         !findImage
           ? NoImageContent()
@@ -30,7 +28,6 @@ export default (): HTMLElement => {
               ${Button({ id: 'go-image', text: 'Image', className: 'job-button' })}
               ${Button({ id: 'go-home', text: 'Home', className: 'job-button' })}
             </div>
-
           `
       }
     </section>
@@ -39,14 +36,14 @@ export default (): HTMLElement => {
   clickListener({
     seletor: '#go-image',
     callback: () => {
-      controller.render('/image');
+      controller.view.render('/image');
     },
   });
 
   clickListener({
     seletor: '#go-home',
     callback: () => {
-      controller.render('/');
+      controller.view.render('/');
     },
   });
 

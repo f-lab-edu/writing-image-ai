@@ -1,19 +1,24 @@
 import Button from '../components/button';
 import NoImageContent from '../components/no-image';
 import { $app } from '../constants/element';
-import controller from '../main';
+import { controller } from '../main';
 import { upscaleIamgeByKarlo } from '../services/karlo.api';
 import { clickListener } from '../utils/click';
 
 export default (): HTMLElement => {
-  const state = controller.model.getState();
+  const { images } = controller.model.getState();
   $app.innerHTML = `
-    <section style="display: flex; flex-direction: column; align-items: center; padding-top: 8px">
+    <section class="space-y-1" style="display: flex; flex-direction: column; align-items: center; padding-top: 8px;">
       ${
-        state.images.length === 0
+        images.length === 0
           ? NoImageContent()
           : `
-            ${state.images.map((image) => `<img src="data:image/png;base64,${image.image}" alt="${image.id}" id="${image.id}" />`)}
+            ${images.map(
+              (image) => `
+                <img src="data:image/png;base64,${image.image}" alt="${image.id}" id="${image.id}" />
+                ${Button({ id: `go-variations-${image.id}`, text: 'Variation', className: 'job-button' })}
+            `
+            )}
             <h3>Select Other Job</h3>
             <div class="group-button space-y-1">
               ${Button({ id: 'go-scale-up', text: 'Scale Up', className: 'job-button' })}
@@ -30,14 +35,13 @@ export default (): HTMLElement => {
       controller.model.setLoading(true);
       try {
         const data = await upscaleIamgeByKarlo({
-          images: state.images.map((image) => image.image),
+          images: images.map((image) => image.image),
           return_type: 'base64_string',
         });
-        console.log({ data });
 
         if (data.images) {
           controller.model.setScaleUpImages(data.images);
-          controller.render('/scale-up');
+          controller.view.render('/scale-up');
         }
       } catch (err) {
         console.error(err);
@@ -46,6 +50,15 @@ export default (): HTMLElement => {
       }
     },
   });
+
+  images.forEach((image) =>
+    clickListener({
+      seletor: `#go-variations-${image.id}`,
+      callback: () => {
+        controller.view.render(`/variations?image=${image.id}`);
+      },
+    })
+  );
 
   return $app;
 };

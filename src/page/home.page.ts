@@ -1,5 +1,5 @@
 import { $app } from '../constants/element';
-import controller from '../main';
+import { controller } from '../main';
 import { createIamgeByKarlo } from '../services/karlo.api';
 import { submitAsyncListener } from '../utils/click';
 
@@ -35,7 +35,7 @@ export default () => {
         if (data.images) {
           controller.model.setImages(data.images);
         }
-        controller.render('/image');
+        controller.view.render('/image');
       } catch (err) {
         console.error(err);
       } finally {

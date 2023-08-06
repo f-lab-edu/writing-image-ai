@@ -45,7 +45,7 @@ button:disabled {
 }
 
 #loading-wrapper {
-  position: absolute;
+  position: fixed;
   width: 100vw;
   height: 100vh;
   background-color: rgba(107, 114, 128, 0.5);

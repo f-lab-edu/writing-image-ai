@@ -12,8 +12,6 @@ class Controller {
 
     this.model.registerImageObserver(() => this.onImageChange());
     this.model.registerLoadingObserver((loading) => this.onLoadingChange(loading));
-
-    this.initialize();
   }
 
   render = (path: string) => {

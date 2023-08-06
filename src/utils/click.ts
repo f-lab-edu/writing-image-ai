@@ -1,5 +1,5 @@
 import { $app } from '../constants/element';
-import controller from '../main';
+import { controller } from '../main';
 
 export const clickListener = ({ seletor, callback }: { seletor: string; callback: () => void }) => {
   $app.querySelector(seletor)?.addEventListener('click', callback);

@@ -1,20 +1,18 @@
 import Button from '../components/button';
 import NoImageContent from '../components/no-image';
 import { $app } from '../constants/element';
-import controller from '../main';
+import { controller } from '../main';
 import { clickListener } from '../utils/click';
 
 export default (): HTMLElement => {
-  const state = controller.model.getState();
+  const { scaleUpImages } = controller.model.getState();
   const section = `
     <section style="display: flex; flex-direction: column; align-items: center; padding-top: 8px">
       ${
-        state.scaleUpImages.length === 0
+        scaleUpImages.length === 0
           ? NoImageContent()
           : `
-            ${state.scaleUpImages.map(
-              (image, index) => `<img src="data:image/png;base64,${image}" alt="${index}-scale-up-image" id="${index}-scale-up-image" />`
-            )} 
+            ${scaleUpImages.map((image, index) => `<img src="data:image/png;base64,${image}" alt="${index}-scale-up-image" id="${index}-scale-up-image" />`)} 
             <h3>Select Other Job</h3>
             <div class="group-button space-y-1">
               ${Button({ id: 'go-image', text: 'Image', className: 'job-button' })}
@@ -31,14 +29,14 @@ export default (): HTMLElement => {
   clickListener({
     seletor: '#go-image',
     callback: () => {
-      controller.render('/image');
+      controller.view.render('/image');
     },
   });
 
   clickListener({
     seletor: '#go-home',
     callback: () => {
-      controller.render('/');
+      controller.view.render('/');
     },
   });
 
