@@ -36,6 +36,10 @@ button:disabled {
   padding: 8px;
 }
 
+.store-button {
+  
+}
+
 .space-y-1 > * + * {
   margin-top: 0.25rem;
 }
