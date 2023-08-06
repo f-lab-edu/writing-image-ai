@@ -1,5 +1,6 @@
 import Button from '../components/button';
 import NoImageContent from '../components/no-image';
+import { failToastify, successToastify } from '../components/toastify';
 import { $app } from '../constants/element';
 import { controller } from '../main';
 import { upscaleIamgeByKarlo } from '../services/karlo.api';
@@ -16,14 +17,14 @@ export default (): HTMLElement => {
             ${images.map(
               (image) => `
                 <img src="data:image/png;base64,${image.image}" alt="${image.id}" id="${image.id}" />
-                ${Button({ id: `go-variations-${image.id}`, text: 'Variation', className: 'job-button' })}
+                <div style="width: 100%; display: flex; justify-content: center;" class="space-x-1">
+                  ${Button({ id: `go-variations-${image.id}`, text: 'Variation', className: 'job-button' })}
+                  ${Button({ id: `store-${image.id}`, text: 'Store', className: 'store-button' })}
+                </div>
+                ${Button({ id: 'go-scale-up', text: 'Scale Up', className: 'job-button' })}
+
             `
             )}
-            <h3>Select Other Job</h3>
-            <div class="group-button space-y-1">
-              ${Button({ id: 'go-scale-up', text: 'Scale Up', className: 'job-button' })}
-              ${Button({ text: 'Comming Soon', className: 'job-button', disabled: true })}
-            </div>
           `
       }
     </section>
@@ -51,14 +52,25 @@ export default (): HTMLElement => {
     },
   });
 
-  images.forEach((image) =>
+  images.forEach((image) => {
     clickListener({
       seletor: `#go-variations-${image.id}`,
       callback: () => {
         controller.view.render(`/variations?image=${image.id}`);
       },
-    })
-  );
+    });
+    clickListener({
+      seletor: `#store-${image.id}`,
+      callback: () => {
+        const result = controller.model.addStoreImages(image);
+        if (result) {
+          successToastify('Succeed Save');
+        } else {
+          failToastify('Failed Save');
+        }
+      },
+    });
+  });
 
   return $app;
 };

@@ -8,5 +8,5 @@ export interface State {
   scaleUpImages: string[];
   variationImage: Image | null;
   loading: boolean;
-  storeImages: Image[];
+  storedImages: Image[];
 }
