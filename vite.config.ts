@@ -9,23 +9,21 @@ const swcConfig = JSON.parse(fs.readFileSync('.swcrc', 'utf-8'));
 export default defineConfig(({ command, mode }) => {
   const env = loadEnv(mode, process.cwd(), '');
 
-  console.log({ mode });
-  console.log({ command });
-  console.log({ env: env.VITE_ENV });
-
+  // 개발 모드 설정
   if (mode === 'development') {
     return {
       build: {
-        target: 'esnext',
-        emptyOutDir: true,
+        target: 'esnext', // 빌드 대상을 esnext로 설정하여 최신 문법 그대로 유지
+        emptyOutDir: true, // 빌드 시 디렉토리를 삭제
       },
       server: {
-        open: true,
-        strictPort: true,
-        port: 3000,
+        // 개발 서버를 설정.
+        open: true, // 실행 시, 열기
+        strictPort: true, // 지정한 포트 준수
+        port: 3000, // 3000번 포트 사용
       },
       css: {
-        devSourcemap: true,
+        devSourcemap: true, // CSS 소스맵 활성화
       },
     };
   }
@@ -33,15 +31,16 @@ export default defineConfig(({ command, mode }) => {
   if (mode === 'production') {
     return {
       plugins: [
-        basicSsl(),
+        basicSsl(), // vite에서 지원하는 basic ssl  적용
         {
           name: 'swc-transform',
           transform(code, id) {
             if (/\.ts?$/.test(id)) {
+              // ts 코드만 js로 변환
               const swcResult = transformSync(code, {
                 filename: id,
                 ...swcConfig,
-                sourceMaps: 'inline',
+                sourceMaps: false, // 소스맵 사용하지 않기.
               });
               return swcResult?.code ?? '';
             }
