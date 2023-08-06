@@ -4,14 +4,15 @@ interface ButtonParam {
   className?: string;
   style?: string;
   disabled?: boolean;
+  type?: string;
 }
 
-const Button = ({ id, text, className, style, disabled }: ButtonParam) => {
+const Button = ({ id, text, className, style, disabled, type = 'button' }: ButtonParam) => {
   const propertyId = id ? `id="${id}"` : '';
-  const propertyClass = disabled ? '' : `class="${className ?? ''}"`;
+  const propertyClass = `class="${className ?? ''}"`;
   const propertystyle = style ? `style="${style}"` : '';
 
-  return ` <button ${propertyId} ${propertyClass} ${propertystyle} ${disabled && 'disabled'}>${text ?? ''}</button>`;
+  return ` <button type="${type}" ${propertyId} ${propertyClass} ${propertystyle} ${disabled && 'disabled'}>${text ?? ''}</button>`;
 };
 
 export default Button;

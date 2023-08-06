@@ -27,7 +27,7 @@ class Controller {
       });
     });
 
-    this.render(window.location.pathname);
+    this.render(window.location.href.replace(window.location.origin, ''));
   }
 
   onImageChange = () => {

@@ -40,10 +40,6 @@ class Model {
     this.notifyImageHandler();
   };
 
-  setVariationImage = (image: Image) => {
-    this.state.variationImage = image;
-  };
-
   addImage = (image?: Image) => {
     if (!image) {
       return;
@@ -67,6 +63,10 @@ class Model {
     const filteredImage = this.state.images.filter((item) => item.id !== image.id);
     this.state.images = [...filteredImage, image];
     this.notifyImageHandler();
+  };
+
+  setVariationImage = (image: Image) => {
+    this.state.variationImage = image;
   };
 
   setScaleUpImages = (scaleUpImages: string[]) => {

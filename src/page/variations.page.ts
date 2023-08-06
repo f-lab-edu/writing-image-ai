@@ -17,8 +17,11 @@ export default (): HTMLElement => {
           ? NoImageContent()
           : `
             <img src="data:image/png;base64,${findImage.image}" alt="${findImage.id}-scale-up-image" id="${findImage.id}" />
-            <form id="variation-image-submit">
-              <input id="variation-image-prompt" />
+            <form id="variation-image-submit" style="display:flex; justify-content: center; align-items: center;">
+              <div>
+                <input style="margin-right: 12px" id="variation-image-prompt" />
+              </div>
+              ${Button({ id: 'go-image', text: 'submit', className: 'input-button', type: 'submit' })}
             </form>
             
             <div id="variation-images"></div>
