@@ -1,12 +1,12 @@
 {
-  "$schema": "https://json.schemastore.org/swcrc",
-  "jsc": { // 자바스크립트 설정
+  "$schema": "https:/* json.schemastore.org/swcrc",
+  "jsc": {
     "parser": {
-      "syntax": "typescript", // 타입스크립트 문법 파싱
-      "dynamicImport": true, // 동적 import 구문 허용
-      "decorators": false // 데코레이터를 사용하지 않을 것
+      "syntax": "typescript",
+      "dynamicImport": true,
+      "decorators": false
     },
-    "target": "es5" // 최종 출력은 ES5 문법을 따르게 된다.
+    "target": "es5"
   },
-  "minify": true // 최종 출력 코드 최소화
+  "minify": true
 }

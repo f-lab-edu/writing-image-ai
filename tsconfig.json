@@ -1,24 +1,24 @@
 {
   "compilerOptions": {
-    "useDefineForClassFields": true, // 클래스 필드를 private 필드로 정의하는 것을 활성화
-    "module": "ESNext", // 최신 ES 문법 허용
-    "skipLibCheck": true, // 선언 파일의 타입 검사를 건너 뛰기
+    "useDefineForClassFields": true /*  클래스 필드를 private 필드로 정의하는 것을 활성화 */,
+    "module": "ESNext" /*  최신 ES 문법 허용 */,
+    "skipLibCheck": true /*  선언 파일의 타입 검사를 건너 뛰기 */,
 
     /* Bundler mode */
-    "moduleResolution": "bundler", // bundler로 설정하여 모듈 해석 방식을 정의
-    "allowImportingTsExtensions": true, // TS 확장자를 import 하는 것을 허용
-    "resolveJsonModule": true, // JSON 모듈 임포트할 수 있도록 설정
-    "isolatedModules": true, // 각 모듈을 독립적인 모듈로 처리.
-    "noEmit": true, // 출력 파일을 생성하지 않기.
+    "moduleResolution": "bundler" /*  bundler로 설정하여 모듈 해석 방식을 정의 */,
+    "allowImportingTsExtensions": true /*  TS 확장자를 import 하는 것을 허용 */,
+    "resolveJsonModule": true /*  JSON 모듈 임포트할 수 있도록 설정 */,
+    "isolatedModules": true /*  각 모듈을 독립적인 모듈로 처리. */,
+    "noEmit": true /*  출력 파일을 생성하지 않기. */,
 
     /* Linting */
-    "strict": true, // 엄격한 타입 검사 옵션을 활성화
-    "noUnusedLocals": true, // 사용되지 않는 로컬 변수를 오류로 처리
-    "noUnusedParameters": true, // 사용되지 않는 파라미터를 오류로 처리
-    "noFallthroughCasesInSwitch": true // switch 문에서 case 절이 빠짐없이 처리되도록 함
+    "strict": true /* 엄격한 타입 검사 옵션을 활성화 */,
+    "noUnusedLocals": true /*  사용되지 않는 로컬 변수를 오류로 처리 */,
+    "noUnusedParameters": true /*  사용되지 않는 파라미터를 오류로 처리 */,
+    "noFallthroughCasesInSwitch": true /*  switch 문에서 case 절이 빠짐없이 처리되도록 함 */
   },
   "ts-node": {
-    "swc": true // SWC를 사용하여 TypeScript를 컴파일하도록 설정
+    "swc": true /*  SWC를 사용하여 TypeScript를 컴파일하도록 설정 */
   },
-  "include": ["src"] //  src 디렉토리에 있는 파일만 컴파일 대상으로 포함
+  "include": ["src"] /*   src 디렉토리에 있는 파일만 컴파일 대상으로 포함 */
 }
