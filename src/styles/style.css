@@ -33,7 +33,9 @@ button:disabled {
 }
 
 .input-button {
-  padding: 8px;
+  width: 100%;
+  padding-top: 12px;
+  padding-bottom: 12px;
 }
 
 .store-button {
