@@ -21,12 +21,12 @@ export default (): HTMLElement => {
                   ${Button({ id: `go-variations-${image.id}`, text: 'Variation', className: 'job-button' })}
                   ${Button({ id: `store-${image.id}`, text: 'Store', className: 'store-button' })}
                 </div>
-                ${Button({ id: 'go-scale-up', text: 'Scale Up', className: 'job-button' })}
-
             `
             )}
           `
       }
+      <br />
+      ${Button({ id: 'go-scale-up', text: 'Scale Up', className: 'job-button' })}
     </section>
   `;
 
