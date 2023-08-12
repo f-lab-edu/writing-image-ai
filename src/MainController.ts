@@ -1,5 +1,5 @@
-import Model from './Model';
-import View from './View';
+import Model from './MainModel';
+import View from './MainView';
 import { $loading } from './constants/element';
 
 class Controller {

@@ -21,6 +21,15 @@ export default defineConfig(({ command, mode }) => {
         open: true /*  실행 시, 열기 */,
         strictPort: true /*  지정한 포트 준수 */,
         port: 3000 /*  3000번 포트 사용 */,
+        proxy: {
+          '/kakao': {
+            target: 'https://api.kakaobrain.com',
+            changeOrigin: true,
+            rewrite: (path) => path.replace(/^\/kakao/, ''),
+            secure: false,
+            ws: true,
+          },
+        },
       },
       css: {
         devSourcemap: true /*  CSS 소스맵 활성화 */,

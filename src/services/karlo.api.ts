@@ -1,4 +1,3 @@
-import { commonAxios } from './axios.config';
 import {
   CreateIamgeByKarloParams,
   CreateIamgeByKarloResponse,
@@ -9,25 +8,18 @@ import {
   VariationsIamgeByKarloParams,
   VariationsIamgeByKarloResponse,
 } from '../types/karlo.type';
+import { kakoApi } from './axios.config';
 
-const apiKey = import.meta.env.VITE_APP_KARLO_API_KEY;
-
-const karloApi = commonAxios({
-  baseURL: 'https://api.kakaobrain.com/v2/inference/karlo',
-  headers: {
-    'Content-Type': 'application/json',
-    Authorization: `KakaoAK ${apiKey}`,
-  },
-});
-
+const karloUrl = '/v2/inference/karlo';
 export const createIamgeByKarlo = (param: CreateIamgeByKarloParams) =>
-  karloApi.post<CreateIamgeByKarloResponse>('/t2i', param).then((res) => {
+  kakoApi.post<CreateIamgeByKarloResponse>(karloUrl + '/t2i', param).then((res) => {
     return res.data;
   });
 
-export const upscaleIamgeByKarlo = (param: UpscaleIamgeByKarloParams) => karloApi.post<UpscaleIamgeByKarloResponse>('/upscale', param).then((res) => res.data);
+export const upscaleIamgeByKarlo = (param: UpscaleIamgeByKarloParams) =>
+  kakoApi.post<UpscaleIamgeByKarloResponse>(karloUrl + '/upscale', param).then((res) => res.data);
 
 export const variationsIamgeByKarlo = (param: VariationsIamgeByKarloParams) =>
-  karloApi.post<VariationsIamgeByKarloResponse>('/variations', param).then((res) => res.data);
+  kakoApi.post<VariationsIamgeByKarloResponse>(karloUrl + '/variations', param).then((res) => res.data);
 
-export const nsfwIamgeByKarlo = (param: NSFWCheckerIamgeByKarloParams) => karloApi.post<NSFWCheckerIamgeByKarloResponse>('/variations', param);
+export const nsfwIamgeByKarlo = (param: NSFWCheckerIamgeByKarloParams) => kakoApi.post<NSFWCheckerIamgeByKarloResponse>(karloUrl + '/variations', param);

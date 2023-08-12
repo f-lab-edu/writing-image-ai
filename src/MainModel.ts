@@ -112,15 +112,13 @@ class Model {
 
   notifyImageHandler = () => {
     this.setStateOnStorage(this.state);
-    if (this.imageObservers) {
-      this.imageObservers();
-    }
+    if (!this.imageObservers) return;
+    this.imageObservers();
   };
 
   notifyLoadingHandler = () => {
-    if (this.loadingObservers) {
-      this.loadingObservers(this.state.loading);
-    }
+    if (!this.loadingObservers) return;
+    this.loadingObservers(this.state.loading);
   };
 }
 
