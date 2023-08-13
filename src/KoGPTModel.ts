@@ -7,24 +7,8 @@ class KoGPTModel {
 
   openObservers: (() => void | undefined) | undefined;
 
-  constructor() {
-    this.state = this.getInitialState(this.state);
-  }
-
   cloneDeep = (state: typeof this.state): typeof this.state => {
     return structuredClone(state);
-  };
-
-  getInitialState = (initalState: typeof this.state) => {
-    const state = sessionStorage.getItem('ko-gpt');
-    if (state) {
-      return JSON.parse(state);
-    }
-    return initalState;
-  };
-
-  setStateOnStorage = (state: typeof this.state) => {
-    sessionStorage.setItem('ko-gpt', JSON.stringify(state));
   };
 
   getState = () => {

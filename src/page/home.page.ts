@@ -57,9 +57,7 @@ export default () => {
           return_type: 'base64_string',
         });
 
-        if (data.images) {
-          controller.model.setImages(data.images);
-        }
+        controller.model.setImages(data.images);
         controller.view.render('/image');
       } catch (err) {
         console.error(err);

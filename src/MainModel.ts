@@ -22,10 +22,7 @@ class Model {
 
   getInitialState = (initalState: State) => {
     const state = sessionStorage.getItem('state');
-    if (state) {
-      return JSON.parse(state);
-    }
-    return initalState;
+    return state ? JSON.parse(state) : initalState;
   };
 
   setStateOnStorage = (state: State) => {
@@ -42,27 +39,16 @@ class Model {
   };
 
   addImage = (image?: Image) => {
-    if (!image) {
-      return;
-    }
+    if (!image) return;
+
     this.state.images = [...this.state.images, image];
     this.notifyImageHandler();
   };
 
   deleteImage = (image?: Image) => {
-    if (!image) {
-      return;
-    }
-    this.state.images = this.state.images.filter((item) => item.id !== image.id);
-    this.notifyImageHandler();
-  };
+    if (!image) return;
 
-  updateImage = (image?: Image) => {
-    if (!image) {
-      return;
-    }
-    const filteredImage = this.state.images.filter((item) => item.id !== image.id);
-    this.state.images = [...filteredImage, image];
+    this.state.images = this.state.images.filter((item) => item.id !== image.id);
     this.notifyImageHandler();
   };
 
@@ -75,20 +61,16 @@ class Model {
     this.notifyImageHandler();
   };
 
-  addStoreImages = (image: Image) => {
-    if (this.state.storedImages.map((image) => image.id).find((item) => item === image.id)) {
-      return false;
-    }
+  addStoreImages = (image: Image): boolean => {
+    const isStored = this.state.storedImages.map((image) => image.id).find((item) => item === image.id);
+    if (isStored) return false;
 
     this.state.storedImages = [...this.state.storedImages, image];
     this.notifyImageHandler();
     return true;
   };
 
-  deleteStoreImage = (image?: Image) => {
-    if (!image) {
-      return;
-    }
+  deleteStoreImage = (image: Image) => {
     this.state.storedImages = this.state.storedImages.filter((item) => item.id !== image.id);
     this.notifyImageHandler();
   };
@@ -111,13 +93,15 @@ class Model {
   };
 
   notifyImageHandler = () => {
-    this.setStateOnStorage(this.state);
     if (!this.imageObservers) return;
+
+    this.setStateOnStorage(this.state);
     this.imageObservers();
   };
 
   notifyLoadingHandler = () => {
     if (!this.loadingObservers) return;
+
     this.loadingObservers(this.state.loading);
   };
 }

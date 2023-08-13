@@ -1,21 +1,19 @@
 import Toastify from 'toastify-js';
 
-export const successToastify = (text: string) => {
+const showToast = (text: string, background: string) => {
   Toastify({
     text,
     duration: 3000,
     style: {
-      background: 'linear-gradient(to right, rgb(219 234 254), rgb(37 99 235))',
+      background,
     },
   }).showToast();
 };
 
+export const successToastify = (text: string) => {
+  showToast(text, 'linear-gradient(to right, rgb(219 234 254), rgb(37 99 235))');
+};
+
 export const failToastify = (text: string) => {
-  Toastify({
-    text,
-    duration: 3000,
-    style: {
-      background: 'linear-gradient(to right, rgb(254 226 226), rgb(239 68 68))',
-    },
-  }).showToast();
+  showToast(text, 'linear-gradient(to right, rgb(254 226 226), rgb(239 68 68))');
 };

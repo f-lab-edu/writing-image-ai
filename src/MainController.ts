@@ -21,9 +21,7 @@ class Controller {
   initialize() {
     window.addEventListener('load', () => {
       window.addEventListener('popstate', () => {
-        console.log('popstate');
-        const path = window.location.pathname;
-        this.render(path);
+        this.render(window.location.pathname);
       });
     });
 
@@ -31,16 +29,11 @@ class Controller {
   }
 
   onImageChange = () => {
-    const { pathname } = window.location;
-    this.render(pathname);
+    this.render(window.location.pathname);
   };
 
   onLoadingChange = (loading: boolean) => {
-    if (loading) {
-      $loading.style.display = 'flex';
-    } else {
-      $loading.style.display = 'none';
-    }
+    $loading.style.display = loading ? 'flex' : 'none';
   };
 }
 

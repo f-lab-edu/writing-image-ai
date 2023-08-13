@@ -76,13 +76,13 @@ export interface VariationsIamgeByKarloResponse extends KarloResponseBase {
   }[];
 }
 
-export interface NSFWCheckerIamgeByKarloParams {
-  images: string[]; // 검사 대상 이미지 파일을 Base64 인코딩한 값의 배열 (최대: 8개)
-}
+// export interface NSFWCheckerIamgeByKarloParams {
+//   images: string[]; // 검사 대상 이미지 파일을 Base64 인코딩한 값의 배열 (최대: 8개)
+// }
 
-export interface NSFWCheckerIamgeByKarloResponse extends KarloResponseBase {
-  results: {
-    nsfw_content_detected: boolean;
-    nsfw_score: number;
-  }[];
-}
+// export interface NSFWCheckerIamgeByKarloResponse extends KarloResponseBase {
+//   results: {
+//     nsfw_content_detected: boolean;
+//     nsfw_score: number;
+//   }[];
+// }

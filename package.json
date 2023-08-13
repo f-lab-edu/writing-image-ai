@@ -36,16 +36,10 @@
     "typescript": "*",
     "vite": "^4.4.5"
   },
-  "husky": {
-    "hooks": {
-      "pre-commit": "lint-staged"
-    }
-  },
   "lint-staged": {
-    "src/**/*.ts": [
-      "eslint --fix",
+    "*.{js,jsx,ts,tsx}": [
       "prettier --write",
-      "git add"
+      "eslint --fix"
     ]
   }
 }

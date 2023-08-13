@@ -9,9 +9,8 @@ class KoGPTView {
   }
 
   render = () => {
-    if (this.component) {
-      this.component();
-    }
+    if (!this.component) return;
+    this.component();
   };
 }
 
