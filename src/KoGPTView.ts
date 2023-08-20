@@ -1,5 +1,5 @@
 import KoGptComponent from './components/ko-gpt';
-import { Component } from './types/view.type';
+import { type Component } from './types/view.type';
 
 class KoGPTView {
   component: Component | undefined;
@@ -8,10 +8,10 @@ class KoGPTView {
     this.component = KoGptComponent;
   }
 
-  render = () => {
+  render() {
     if (!this.component) return;
     this.component();
-  };
+  }
 }
 
 export default KoGPTView;

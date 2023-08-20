@@ -3,12 +3,12 @@ import NoImageContent from '../components/no-image';
 import { $app } from '../constants/element';
 import { controller } from '../main';
 import { variationsIamgeByKarlo } from '../services/karlo.api';
-import { clickListener, submitAsyncListener } from '../utils/click';
+import { addClickEventListener, addSubmitEventListener } from '../utils/click';
 
 export default (): HTMLElement => {
-  const { images } = controller.model.getState();
-  let params = new URLSearchParams(window.location.search);
-  let findImage = images.find((image) => image.id === params.get('image'));
+  const { images } = controller.getState();
+  const params = new URLSearchParams(window.location.search);
+  const findImage = images.find((image) => image.id === params.get('image'));
 
   $app.innerHTML = `
     <section class="space-y-1" style="display: flex; flex-direction: column; align-items: center; padding-top: 8px">
@@ -29,17 +29,17 @@ export default (): HTMLElement => {
     </section>
   `;
 
-  clickListener({
-    seletor: '#go-image',
+  addClickEventListener({
+    selector: '#go-image',
     callback: () => {
-      controller.view.render('/image');
+      controller.render('/image');
     },
   });
 
-  clickListener({
-    seletor: '#go-home',
+  addClickEventListener({
+    selector: '#go-home',
     callback: () => {
-      controller.view.render('/');
+      controller.render('/');
     },
   });
 
@@ -47,8 +47,8 @@ export default (): HTMLElement => {
     return $app;
   }
 
-  submitAsyncListener({
-    seletor: '#variation-image-submit',
+  addSubmitEventListener({
+    selector: '#variation-image-submit',
     callback: async () => {
       const variationImageInput = $app.querySelector('#variation-image-prompt') as HTMLInputElement;
       const prompt = variationImageInput.value;
@@ -59,16 +59,18 @@ export default (): HTMLElement => {
         prompt,
         return_type: 'base64_string',
       });
-      
+
       const $variationImages = $app.querySelector('#variation-images');
       if ($variationImages) {
         $variationImages.innerHTML = `
-        ${data.images.map(
-          (image) => `
-            <img src="data:image/png;base64,${image.image}" alt="${image.id}-scale-up-image" id="${image.id}" />
-            `
-        )}
-      `;
+          ${data.images
+            .map(
+              ({ image, id }) => `
+                  <img src="data:image/png;base64,${image}" alt="${id}-scale-up-image" id="${id}" />
+              `
+            )
+            .join('')}
+        `;
       }
     },
   });

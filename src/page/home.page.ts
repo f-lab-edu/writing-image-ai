@@ -2,8 +2,8 @@ import Button from '../components/button';
 import { $app } from '../constants/element';
 import { controller } from '../main';
 import { createIamgeByKarlo } from '../services/karlo.api';
-import { KarloSamples } from '../types/karlo.type';
-import { submitAsyncListener } from '../utils/click';
+import { type KarloSamples } from '../types/karlo.type';
+import { addSubmitEventListener } from '../utils/click';
 
 export default () => {
   $app.innerHTML = `
@@ -42,8 +42,8 @@ export default () => {
     </section>
   `;
 
-  submitAsyncListener({
-    seletor: '#create-image-submit',
+  addSubmitEventListener({
+    selector: '#create-image-submit',
     callback: async () => {
       const createImageInput = $app.querySelector('#create-image-prompt') as HTMLInputElement;
       const createImageSample = $app.querySelector('#create-image-samples') as HTMLSelectElement;
@@ -57,8 +57,8 @@ export default () => {
           return_type: 'base64_string',
         });
 
-        controller.model.setImages(data.images);
-        controller.view.render('/image');
+        controller.setImages(data.images);
+        controller.render('/image');
       } catch (err) {
         console.error(err);
       } finally {

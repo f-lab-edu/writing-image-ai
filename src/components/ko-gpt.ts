@@ -3,7 +3,7 @@ import { kogptController } from '../main';
 import { generationByKoGPT } from '../services/kogpt.api';
 
 const KoGptComponent = () => {
-  const { isOpen } = kogptController.model.getState();
+  const { isOpen } = kogptController.getState();
 
   $KoGPT.innerHTML = `
     <button id="KoGPT-toggle" style="display: ${!isOpen ? 'flex' : 'none'}";>
@@ -26,10 +26,10 @@ const KoGptComponent = () => {
   `;
 
   $KoGPT.querySelector('#KoGPT-toggle')?.addEventListener('click', () => {
-    kogptController.model.toggleOpen();
+    kogptController.toggleOpen();
   });
   $KoGPT.querySelector('#KoGPT-close-btn')?.addEventListener('click', () => {
-    kogptController.model.toggleOpen();
+    kogptController.toggleOpen();
   });
 
   $KoGPT.querySelector('#KoGPT-input-form')?.addEventListener('submit', async (e) => {
@@ -43,7 +43,7 @@ const KoGptComponent = () => {
 
     try {
       const data = await generationByKoGPT({
-        prompt: prompt,
+        prompt,
         max_tokens: 120,
         n: 1,
       });

@@ -1,20 +1,20 @@
 import { $app } from '../constants/element';
 import { controller } from '../main';
 
-export const clickListener = ({ seletor, callback }: { seletor: string; callback: () => void }) => {
-  $app.querySelector(seletor)?.addEventListener('click', callback);
+export const addClickEventListener = ({ selector, callback }: { selector: string; callback: () => void }) => {
+  $app.querySelector(selector)?.addEventListener('click', callback);
 };
 
-export const submitAsyncListener = ({ seletor, callback }: { seletor: string; callback: () => void }) => {
-  $app.querySelector(seletor)?.addEventListener('submit', async (e) => {
+export const addSubmitEventListener = ({ selector, callback }: { selector: string; callback: () => void }) => {
+  $app.querySelector(selector)?.addEventListener('submit', (e) => {
     e.preventDefault();
     try {
-      controller.model.setLoading(true);
-      await callback();
+      controller.setLoading(true);
+      callback();
     } catch (err) {
       console.error(err);
     } finally {
-      controller.model.setLoading(false);
+      controller.setLoading(false);
     }
   });
 };
