@@ -32,7 +32,7 @@ module.exports = {
   parserOptions: {
     ecmaVersion: 'latest',
     sourceType: 'module',
-    project: './tsconfig.json', /*  여기에 추가합니다. */
+    project: './tsconfig.json',
   },
   settings: {
     "import/resolver": {
@@ -40,14 +40,15 @@ module.exports = {
     }
   },
   rules: {
-    'no-console': ['error', { allow: ['warn', 'error'] }], /*  console에서 log는 에러, error는 경고 */
-    "@typescript-eslint/no-non-null-assertion": "off", /*  null이 아닌 assertion 에러 표시 (off) */
-    "space-before-function-paren": "off", /*  함수 앞 공백이 없으면 에러 (off) */
-    "@typescript-eslint/space-before-function-paren": "off", /*  함수 앞 공백이 없으면 에러 (off), */
+    'no-console': ['error', { allow: ['warn', 'error'] }], // console에서 log는 에러, error는 경고
+    "@typescript-eslint/no-non-null-assertion": "off", // null이 아닌 assertion 에러 표시 (off)
+    "space-before-function-paren": "off", // 함수 앞 공백이 없으면 에러 (off)
+    "@typescript-eslint/space-before-function-paren": "off", // 함수 앞 공백이 없으면 에러 (off)
     "@typescript-eslint/explicit-function-return-type": "off", // return 타입 없어도 된다.
     "@typescript-eslint/no-invalid-void-type": "off", // void 사용을 허용.
     "@typescript-eslint/strict-boolean-expressions": "off", // 비교 타입은 boolean 이외에도 사용 허용. 
     "@typescript-eslint/no-misused-promises": "off", // async/await 보다 then 중심적이어서 사용하지 않음.
+    "@typescript-eslint/triple-slash-reference": "off", // ecma에서 권장하는 참조 방법은 아니지만 난 써야겠어요.
   },
   ignorePatterns: ['.eslintrc.cjs', "vite.config.ts"],
 };

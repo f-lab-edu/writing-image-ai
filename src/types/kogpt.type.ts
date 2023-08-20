@@ -8,10 +8,10 @@ export interface KogptGenerationParam {
 
 export interface KogptGenerationResponse {
   id: string;
-  generations: {
+  generations: Array<{
     text: string;
     token: number;
-  }[];
+  }>;
   usage: {
     prompt_tokens: number;
     generated_tokens: number;
@@ -23,4 +23,3 @@ export interface KogptGenerationFail {
   code: number;
   msg: string;
 }
-

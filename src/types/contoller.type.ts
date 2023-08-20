@@ -1,4 +1,4 @@
-import { Image } from './model.type';
+import { type Image } from './model.type';
 
 export interface Controller {
   addImage: (image: Image) => void;

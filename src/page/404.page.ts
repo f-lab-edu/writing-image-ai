@@ -1,8 +1,8 @@
 import GoHomeComponent from '../components/go-home';
 import { $app } from '../constants/element';
-import { Component } from '../types/view.type';
+import { type Component } from '../types/view.type';
 
-let notFoundPage: Component = () => {
+const notFoundPage: Component = () => {
   // Do nothing or return a default HTMLElement, e.g., an empty div
   $app.innerHTML = `
     <div style="text-align: center">

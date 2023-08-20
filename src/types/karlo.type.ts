@@ -30,11 +30,11 @@ export interface CreateIamgeByKarloParams {
 }
 
 export interface CreateIamgeByKarloResponse extends KarloResponseBase {
-  images: {
+  images: Array<{
     id: string;
     seed: number;
     image: string;
-  }[];
+  }>;
 }
 
 export interface UpscaleIamgeByKarloParams {
@@ -69,11 +69,11 @@ export interface VariationsIamgeByKarloParams {
 }
 
 export interface VariationsIamgeByKarloResponse extends KarloResponseBase {
-  images: {
+  images: Array<{
     id: string;
     image: string;
     seed: number;
-  }[];
+  }>;
 }
 
 // export interface NSFWCheckerIamgeByKarloParams {

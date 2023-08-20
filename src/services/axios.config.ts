@@ -8,7 +8,9 @@ export const kakoApi = axios.create({
 
 kakoApi.interceptors.request.use((config) => {
   config.headers['Content-Type'] = 'application/json';
-  config.headers.Authorization = `KakaoAK ${apiKey}`;
+  if (apiKey) {
+    config.headers.Authorization = `KakaoAK ${apiKey}`;
+  }
   return config;
 });
 
@@ -16,7 +18,7 @@ kakoApi.interceptors.response.use(
   (response) => {
     return response;
   },
-  (error) => {
-    return Promise.reject(error);
+  async (error) => {
+    return await Promise.reject(error);
   }
 );
