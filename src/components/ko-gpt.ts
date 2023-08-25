@@ -6,7 +6,7 @@ const KoGptComponent = () => {
   const { isOpen } = kogptController.getState();
 
   $KoGPT.innerHTML = `
-    <button id="KoGPT-toggle" style="display: ${!isOpen ? 'flex' : 'none'}";>
+    <button id="KoGPT-toggle" style="display: ${!isOpen ? 'flex' : 'none'}; ";>
       <p>KoGPT</p>
     </button>
     <div id="KoGPT-wrapper" style="display: ${isOpen ? 'flex' : 'none'};">
@@ -26,10 +26,10 @@ const KoGptComponent = () => {
   `;
 
   $KoGPT.querySelector('#KoGPT-toggle')?.addEventListener('click', () => {
-    kogptController.toggleOpen();
+    kogptController.toggle();
   });
   $KoGPT.querySelector('#KoGPT-close-btn')?.addEventListener('click', () => {
-    kogptController.toggleOpen();
+    kogptController.toggle();
   });
 
   $KoGPT.querySelector('#KoGPT-input-form')?.addEventListener('submit', async (e) => {

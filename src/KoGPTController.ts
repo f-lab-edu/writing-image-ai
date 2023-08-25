@@ -18,8 +18,8 @@ class KoGPTController {
     this.#view.render();
   }
 
-  toggleOpen() {
-    this.#model.toggleOpen();
+  toggle() {
+    this.#model.toggle();
   }
 
   getState() {

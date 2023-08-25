@@ -48,7 +48,9 @@ module.exports = {
     "@typescript-eslint/no-invalid-void-type": "off", // void 사용을 허용.
     "@typescript-eslint/strict-boolean-expressions": "off", // 비교 타입은 boolean 이외에도 사용 허용. 
     "@typescript-eslint/no-misused-promises": "off", // async/await 보다 then 중심적이어서 사용하지 않음.
-    "@typescript-eslint/triple-slash-reference": "off", // ecma에서 권장하는 참조 방법은 아니지만 난 써야겠어요.
+    "@typescript-eslint/triple-slash-reference": "off", // 슬래시 세번 쓰면서 하는 참조 방법 ecma에서 권장하는 참조 방법은 아니지만 난 써야겠어요.
+    "@typescript-eslint/await-thenable": "off", // 할당할 변수가 없어도 Thenable 하지않다고 해서 지웠습니다.
+    "@typescript-eslint/no-confusing-void-expression": "off", // void를 반환하고 싶어서 off 했습니다.
   },
   ignorePatterns: ['.eslintrc.cjs', "vite.config.ts"],
 };

@@ -6,11 +6,11 @@ export const addClickEventListener = ({ selector, callback }: { selector: string
 };
 
 export const addSubmitEventListener = ({ selector, callback }: { selector: string; callback: () => void }) => {
-  $app.querySelector(selector)?.addEventListener('submit', (e) => {
+  $app.querySelector(selector)?.addEventListener('submit', async (e) => {
     e.preventDefault();
     try {
       controller.setLoading(true);
-      callback();
+      await callback();
     } catch (err) {
       console.error(err);
     } finally {

@@ -11,7 +11,7 @@ class KoGPTModel {
     return Object.freeze(structuredClone(this.#state));
   }
 
-  toggleOpen() {
+  toggle() {
     this.#state.isOpen = !this.#state.isOpen;
     this.notifyOpenHandler();
   }
