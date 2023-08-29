@@ -6,5 +6,6 @@ export interface Image {
 export interface State {
   images: Image[];
   scaleUpImages: string[];
+  variationImage: Image | null;
   loading: boolean;
 }

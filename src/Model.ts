@@ -4,11 +4,16 @@ class Model {
   state: State = {
     images: [],
     scaleUpImages: [],
+    variationImage: null,
     loading: false,
   };
   imageObservers: (() => void | undefined) | undefined;
   loadingObservers: ((loading: boolean) => void | undefined) | undefined;
   scaleUpObservers: (() => void | undefined) | undefined;
+
+  constructor() {
+    this.state = this.getInitialState(this.state);
+  }
 
   cloneDeep = (state: State): State => {
     return structuredClone(state);
@@ -58,6 +63,10 @@ class Model {
     const filteredImage = this.state.images.filter((item) => item.id !== image.id);
     this.state.images = [...filteredImage, image];
     this.notifyImageHandler();
+  };
+
+  setVariationImage = (image: Image) => {
+    this.state.variationImage = image;
   };
 
   setScaleUpImages = (scaleUpImages: string[]) => {
