@@ -5,5 +5,6 @@ export interface Image {
 
 export interface State {
   images: Image[];
+  scaleUpImages: string[];
   loading: boolean;
 }

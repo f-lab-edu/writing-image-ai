@@ -1,31 +1,9 @@
-import router from './router';
-import homePage from './page/home.page';
-import imagePage from './page/image.page';
-import { eventContext } from './contexts';
-import { $loading } from './constants/element';
+import View from './View';
+import Model from './Model';
+import Controller from './MainController';
 
-router.addRoute('/', homePage);
-router.addRoute('/image', imagePage);
+const model = new Model();
+const view = new View();
+const controller = new Controller(model, view);
 
-eventContext.registerImageObserver(() => {
-  const { pathname } = window.location;
-  router.navigate(pathname);
-});
-
-eventContext.registerLoadingObserver((loading: boolean) => {
-  if (loading) {
-    $loading.style.display = 'flex';
-  } else {
-    $loading.style.display = 'none';
-  }
-});
-
-window.addEventListener('load', () => {
-  window.addEventListener('popstate', () => {
-    console.log('popstate');
-    const path = window.location.pathname;
-    router.navigate(path);
-  });
-});
-
-router.navigate(window.location.pathname);
+export default controller;
