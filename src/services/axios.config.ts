@@ -1,16 +1,24 @@
-import axios, { CreateAxiosDefaults } from 'axios';
+import axios from 'axios';
 
-export const commonAxios = (config?: CreateAxiosDefaults) => {
-  const axiosInstance = axios.create(config);
+const apiKey = import.meta.env.VITE_APP_KARLO_API_KEY;
 
-  axiosInstance.interceptors.response.use(
-    (response) => {
-      return response;
-    },
-    (error) => {
-      return Promise.reject(error);
-    }
-  );
+export const kakoApi = axios.create({
+  baseURL: '/kakao',
+});
 
-  return axiosInstance;
-};
+kakoApi.interceptors.request.use((config) => {
+  config.headers['Content-Type'] = 'application/json';
+  if (apiKey) {
+    config.headers.Authorization = `KakaoAK ${apiKey}`;
+  }
+  return config;
+});
+
+kakoApi.interceptors.response.use(
+  (response) => {
+    return response;
+  },
+  async (error) => {
+    return await Promise.reject(error);
+  }
+);

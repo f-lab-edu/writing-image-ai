@@ -104,3 +104,28 @@ button:disabled {
   height: 40px;
   width: 120px;
 }
+
+#KoGPT {
+  position: fixed;
+  bottom: 30px;
+  right: 30px;
+}
+
+#KoGPT-toggle {
+  width: 75px;
+  height: 75px;
+  border-radius: 100%;
+  justify-content: center;
+  align-items: center;
+  font-weight: 700;
+}
+
+#KoGPT-wrapper {
+  width: 300px;
+  height: 400px;
+  background-color: aliceblue;
+  border-radius: 12px;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+}

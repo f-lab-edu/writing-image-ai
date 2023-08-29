@@ -4,7 +4,7 @@ export interface Route {
   params: any[];
 }
 
-export type RouterCallback = (param: { [key: string]: string }) => void;
+export type RouterCallback = (param: Record<string, string>) => void;
 
 export interface Router {
   addRoute?: (path: string, callback: RouterCallback) => Router;

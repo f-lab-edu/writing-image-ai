@@ -11,7 +11,7 @@ const Button = ({ id, text, className, style, disabled, type = 'button' }: Butto
   const propertyId = id ? `id="${id}"` : '';
   const propertyClass = `class="${className ?? ''}"`;
   const propertystyle = style ? `style="${style}"` : '';
-  return `<button type="${type}" ${propertyId} ${propertyClass} ${propertystyle} ${disabled && 'disabled'}>${text ?? ''}</button>`;
+  return `<button type="${type}" ${propertyId} ${propertyClass} ${propertystyle} ${disabled ? 'disabled' : ''}>${text ?? ''}</button>`;
 };
 
 export default Button;

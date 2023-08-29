@@ -1,33 +1,22 @@
-import { commonAxios } from './axios.config';
 import {
-  CreateIamgeByKarloParams,
-  CreateIamgeByKarloResponse,
-  NSFWCheckerIamgeByKarloParams,
-  NSFWCheckerIamgeByKarloResponse,
-  UpscaleIamgeByKarloParams,
-  UpscaleIamgeByKarloResponse,
-  VariationsIamgeByKarloParams,
-  VariationsIamgeByKarloResponse,
+  type CreateIamgeByKarloParams,
+  type CreateIamgeByKarloResponse,
+  type UpscaleIamgeByKarloParams,
+  type UpscaleIamgeByKarloResponse,
+  type VariationsIamgeByKarloParams,
+  type VariationsIamgeByKarloResponse,
 } from '../types/karlo.type';
+import { kakoApi } from './axios.config';
 
-const apiKey = import.meta.env.VITE_APP_KARLO_API_KEY;
+const _karloUrl = '/v2/inference/karlo';
 
-const karloApi = commonAxios({
-  baseURL: 'https://api.kakaobrain.com/v2/inference/karlo',
-  headers: {
-    'Content-Type': 'application/json',
-    Authorization: `KakaoAK ${apiKey}`,
-  },
-});
-
-export const createIamgeByKarlo = (param: CreateIamgeByKarloParams) =>
-  karloApi.post<CreateIamgeByKarloResponse>('/t2i', param).then((res) => {
+export const createIamgeByKarlo = async (param: CreateIamgeByKarloParams) =>
+  await kakoApi.post<CreateIamgeByKarloResponse>(`${_karloUrl}/t2i`, param).then((res) => {
     return res.data;
   });
 
-export const upscaleIamgeByKarlo = (param: UpscaleIamgeByKarloParams) => karloApi.post<UpscaleIamgeByKarloResponse>('/upscale', param).then((res) => res.data);
+export const upscaleIamgeByKarlo = async (param: UpscaleIamgeByKarloParams) =>
+  await kakoApi.post<UpscaleIamgeByKarloResponse>(`${_karloUrl}/upscale`, param).then((res) => res.data);
 
-export const variationsIamgeByKarlo = (param: VariationsIamgeByKarloParams) =>
-  karloApi.post<VariationsIamgeByKarloResponse>('/variations', param).then((res) => res.data);
-
-export const nsfwIamgeByKarlo = (param: NSFWCheckerIamgeByKarloParams) => karloApi.post<NSFWCheckerIamgeByKarloResponse>('/variations', param);
+export const variationsIamgeByKarlo = async (param: VariationsIamgeByKarloParams) =>
+  await kakoApi.post<VariationsIamgeByKarloResponse>(`${_karloUrl}/variations`, param).then((res) => res.data);

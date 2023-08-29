@@ -3,7 +3,7 @@ import { controller } from '../main';
 import Button from './button';
 
 const navigator = () => {
-  const { images, storedImages } = controller.model.getState();
+  const { images, storedImages } = controller.getState();
 
   const navItems = [
     { key: 'home', text: 'Home', disabled: false },
@@ -13,8 +13,8 @@ const navigator = () => {
 
   let innerNav = '';
 
-  navItems.forEach((item) => {
-    innerNav += Button({ id: `nav-${item.key}`, text: item.text, className: 'nav-itme', disabled: item.disabled });
+  navItems.forEach(({ key, text, disabled }) => {
+    innerNav += Button({ id: `nav-${key}`, text, className: 'nav-itme', disabled });
   });
 
   $menu.innerHTML = `
@@ -22,9 +22,9 @@ const navigator = () => {
   `;
 
   navItems.forEach(
-    (item) =>
-      $menu.querySelector(`#nav-${item.key}`)?.addEventListener('click', () => {
-        controller.render(`/${item.key === 'home' ? '' : item.key}`);
+    ({ key }) =>
+      $menu.querySelector(`#nav-${key}`)?.addEventListener('click', () => {
+        controller.render(`/${key === 'home' ? '' : key}`);
       })
   );
 
