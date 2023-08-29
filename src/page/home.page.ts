@@ -6,10 +6,6 @@ import { createIamgeByKarlo } from '../services/karlo.api';
 import { type KarloSamples } from '../types/karlo.type';
 import { addSubmitEventListener } from '../utils/click';
 
-import { KarloSamples } from '../types/karlo.type';
-import { submitAsyncListener } from '../utils/click';
-
-
 export default () => {
   $app.innerHTML = `
     <section style="padding-top: 12px;">
