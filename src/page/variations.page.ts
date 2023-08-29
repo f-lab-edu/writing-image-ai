@@ -21,16 +21,9 @@ export default (): HTMLElement => {
               <div>
                 <input style="margin-right: 12px" id="variation-image-prompt" />
               </div>
-              ${Button({ id: 'go-image', text: 'submit', className: 'input-button', type: 'submit' })}
+              ${Button({ text: 'submit', className: 'input-button', type: 'submit' })}
             </form>
-            
             <div id="variation-images"></div>
-           
-            <h3>Select Other Job</h3>
-            <div class="group-button space-y-1">
-              ${Button({ id: 'go-image', text: 'Image', className: 'job-button' })}
-              ${Button({ id: 'go-home', text: 'Home', className: 'job-button' })}
-            </div>
           `
       }
     </section>

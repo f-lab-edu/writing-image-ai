@@ -1,3 +1,4 @@
+import Button from '../components/button';
 import { $app } from '../constants/element';
 import { controller } from '../main';
 import { createIamgeByKarlo } from '../services/karlo.api';
@@ -15,7 +16,12 @@ export default () => {
           <b>Prompt</b> 
           (Wirte Only English)
         </label>
-        <input id="create-image-prompt" style="width: 100%; font-size: 16px; margin-top: 6px" placeholder="A cat with white fur" />
+        <div style="display:flex; width: 100%;">
+          <div style="width: 100%; padding-right: 12px;">
+            <input id="create-image-prompt" style="width: 100%; font-size: 16px; margin-top: 6px" placeholder="A cat with white fur" />
+          </div>
+          ${Button({ id: 'go-image', text: 'submit', className: 'input-button', type: 'submit' })}
+        </div>
       </form>
     </section>
   `;

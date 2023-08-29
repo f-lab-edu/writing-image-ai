@@ -6,6 +6,7 @@ class Model {
     scaleUpImages: [],
     variationImage: null,
     loading: false,
+    storedImages: [],
   };
   imageObservers: (() => void | undefined) | undefined;
   loadingObservers: ((loading: boolean) => void | undefined) | undefined;
@@ -72,6 +73,28 @@ class Model {
   setScaleUpImages = (scaleUpImages: string[]) => {
     this.state.scaleUpImages = scaleUpImages;
     this.notifyImageHandler();
+  };
+
+  addStoreImages = (image: Image) => {
+    if (this.state.storedImages.map((image) => image.id).find((item) => item === image.id)) {
+      return false;
+    }
+
+    this.state.storedImages = [...this.state.storedImages, image];
+    this.notifyImageHandler();
+    return true;
+  };
+
+  deleteStoreImage = (image?: Image) => {
+    if (!image) {
+      return;
+    }
+    this.state.storedImages = this.state.storedImages.filter((item) => item.id !== image.id);
+    this.notifyImageHandler();
+  };
+
+  resetStoreImages = () => {
+    this.state.storedImages = [];
   };
 
   setLoading = (loading: boolean) => {
