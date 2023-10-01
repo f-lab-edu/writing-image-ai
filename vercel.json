@@ -2,7 +2,7 @@
   "rewrites": [
     {
       "source": "/kakao/:path*",
-      "destination": "https://api.kakaobrain.com"
+      "destination": "https://api.kakaobrain.com/:path*"
     }
   ]
 }
