@@ -1,0 +1,8 @@
+{
+  "rewrites": [
+    {
+      "source": "/kakao",
+      "destination": "https://api.kakaobrain.com"
+    }
+  ]
+}
