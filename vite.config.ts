@@ -57,14 +57,11 @@ export default defineConfig(({ command, mode }) => {
         },
       ],
       server: {
-        open: true /*  실행 시, 열기 */,
         proxy: {
           '/kakao': {
             target: 'https://api.kakaobrain.com',
             changeOrigin: true,
             rewrite: (path) => path.replace(/^\/kakao/, ''),
-            secure: false,
-            ws: true,
           },
         },
       },
