@@ -1,7 +1,7 @@
 {
   "rewrites": [
     {
-      "source": "/kakao/:path*",
+      "source": "https://writing-image-ai.vercel.app/kaka/:path*",
       "destination": "https://api.kakaobrain.com"
     }
   ]
