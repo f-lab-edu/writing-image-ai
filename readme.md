@@ -4,6 +4,8 @@ Vanilla JS 프로젝트로 Kakao의 Karlo를 이용하여 쉽게 이미지 생�
 
 [초간단 구상안](https://www.figma.com/file/J9joj1W8uGjILmczFdwoCe/Writing-Image-AI?type=whiteboard&node-id=0%3A1&t=AlzHD3jiUJGqLDlc-1)
 
-## 제약 조건
+## link
+- https://writing-image-ai.vercel.app/
 
-- Prompt는 무조건 256자 이내의 영어만 사용할 수 있다.
+## 후기
+Vercel에서 proxy를 쓰려고 했는데, 기본 vite의 설정으로는 되지 않아서 proxy를 설정할 때 시간이 걸렸습니다.
