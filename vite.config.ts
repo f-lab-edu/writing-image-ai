@@ -56,15 +56,6 @@ export default defineConfig(({ command, mode }) => {
           },
         },
       ],
-      server: {
-        proxy: {
-          '/kakao': {
-            target: 'https://api.kakaobrain.com',
-            changeOrigin: true,
-            rewrite: (path) => path.replace(/^\/kakao/, ''),
-          },
-        },
-      },
       preview: {
         host: true,
         port: 8080,
